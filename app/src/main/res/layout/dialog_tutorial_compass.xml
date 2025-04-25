@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#191919"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                style="@style/text_style_20_bold"
+                android:textColor="@color/white"
+                android:text=" activate_compass"
+                android:gravity="center"
+                />
+
+            <TextView
+                style="@style/text_style_14_regular"
+                android:textColor="@color/white"
+                android:text=" string_des_tutorial_compass"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/_198sdp"
+                android:layout_height="@dimen/_78sdp"
+                android:src="@drawable/ic_tutorial_compass"
+                android:scaleType="fitXY"
+                android:layout_marginTop="@dimen/_40sdp"
+                />
+
+            <TextView
+                android:id="@+id/btnGotIt"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/text_style_16_bold"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:background="@drawable/bg_btn_positive"
+                android:paddingHorizontal="@dimen/_29sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_40sdp"
+                />
+            
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

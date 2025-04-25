@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "188532083150",
+    "project_id": "gold-finder-33ac9",
+    "storage_bucket": "gold-finder-33ac9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188532083150:android:aca1e75072cadf4849839f",
+        "android_client_info": {
+          "package_name": "com.triversoft.diary.jellyfish"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG84oBcqDaFiMqEo03rwxHFrciYBxFDPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

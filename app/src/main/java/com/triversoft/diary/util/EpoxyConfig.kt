@@ -1,0 +1,13 @@
+package com.triversoft.diary.util
+
+import com.airbnb.epoxy.EpoxyDataBindingLayouts
+import com.triversoft.diary.R
+
+@EpoxyDataBindingLayouts(
+    value = [
+        R.layout.item_language,
+        R.layout.item_onboarding,
+        R.layout.item_settings,
+    ]
+)
+interface EpoxyConfig

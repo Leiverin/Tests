@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="OutlineTextView">
+        <attr name="tv_colorGradientStart" format="color" />
+        <attr name="tv_colorGradientEnd" format="color" />
+        <attr name="tv_colorStroke" format="color" />
+        <attr name="tv_strokeWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FactorySpriteView">
+        <attr name="level" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="GameTextView">
+        <attr name="gtv_text" format="string"/>
+        <attr name="gtv_textSize" format="dimension"/>
+        <attr name="gtv_gravity" format="enum">
+            <enum name="CENTER" value="0"/>
+            <enum name="START" value="1"/>
+            <enum name="END" value="2"/>
+        </attr>
+        <attr name="gtv_type" format="enum">
+            <enum name="TITLE" value="0"/>
+            <enum name="CONTENT" value="1"/>
+        </attr>
+        <attr name="gtv_font" format="string"/>
+    </declare-styleable>
+
+</resources>

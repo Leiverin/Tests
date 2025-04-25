@@ -1,0 +1,125 @@
+package com.triversoft.diary.util
+
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import java.io.File
+import java.nio.ByteBuffer
+
+@BindingAdapter("visible")
+fun View.visible(isVisible: Boolean) {
+    visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("invisible")
+fun View.invisible(isInvisible: Boolean) {
+    visibility = if (isInvisible) View.INVISIBLE else View.VISIBLE
+}
+
+@BindingAdapter("gone")
+fun View.gone(isGone: Boolean) {
+    visibility = if (isGone) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("marquee")
+fun TextView.setMarquee(isMarquee: Boolean?) {
+    if (isMarquee == true) {
+        marqueeRepeatLimit = -1
+        isSingleLine = true
+        isSelected = true
+    }
+}
+@BindingAdapter("textRes")
+fun TextView.textRes(text: Int) {
+    setText(text)
+}
+
+@BindingAdapter("visibleAnimAlpha")
+fun View.visibleAnimAlpha(isVisible: Boolean) {
+    animate().cancel()
+    if (isVisible) {
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .setDuration(300)
+            .setListener(null)
+    } else {
+        animate()
+            .alpha(0.0f)
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    visibility = View.GONE
+                }
+            })
+    }
+}
+
+fun View.visibleAnimTranslate(isVisible: Boolean, onEnd: (() -> Unit)? = null) {
+    animate().cancel()
+    if (isVisible) {
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(300)
+            .setListener(null)
+    } else {
+        animate()
+            .alpha(0.0f)
+            .translationY((height * 1).toFloat())
+            .setDuration(300)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    onEnd?.invoke()
+                    visibility = View.GONE
+                }
+            })
+    }
+}
+
+@BindingAdapter(
+    value = ["url", "uri", "file", "drawableRes", "drawable", "bitmap", "byteArray", "byteBuffer"],
+    requireAll = false
+)
+fun ImageView.loadImage(
+    url: String? = null,
+    uri: Uri? = null,
+    file: File? = null,
+    drawableRes: Int? = null,
+    drawable: Drawable? = null,
+    bitmap: Bitmap? = null,
+    byteArray: ByteArray? = null,
+    byteBuffer: ByteBuffer? = null,
+) {
+    when {
+        url != null -> Glide.with(context).load(url).into(this)
+        uri != null -> Glide.with(context).load(uri).into(this)
+        file != null -> Glide.with(context).load(file).into(this)
+        drawableRes != null -> Glide.with(context).load(drawableRes).into(this)
+        drawable != null -> Glide.with(context).load(drawable).into(this)
+        bitmap != null -> Glide.with(context).load(bitmap).into(this)
+        byteArray != null -> Glide.with(context).load(byteArray).into(this)
+        byteBuffer != null -> Glide.with(context).load(byteBuffer).into(this)
+    }
+}
+
+@BindingAdapter("onPreventDoubleClick")
+fun View.onPreventDoubleClick(action: () -> Any?){
+    this.setOnClickListener {
+        if (this.isEnabled){
+            this.isEnabled = false
+            action()
+            this.postDelayed({this.isEnabled = true}, 500)
+        }
+    }
+}

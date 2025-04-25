@@ -1,0 +1,209 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'maven-publish'
+    id 'kotlin-android'
+}
+
+group = 'com.github.triversoftLEVERIN'
+version = '1.0.6'
+
+android {
+    namespace 'com.admob.ads'
+    compileSdk  33
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.2.4"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    api 'androidx.core:core-ktx:1.9.0'
+    api 'androidx.appcompat:appcompat:1.5.1'
+    api 'com.google.android.material:material:1.7.0'
+
+    api platform('com.google.firebase:firebase-bom:33.7.0')
+    api 'com.google.firebase:firebase-analytics-ktx'
+    api 'com.google.firebase:firebase-crashlytics-ktx'
+    api 'com.google.firebase:firebase-config-ktx'
+
+    implementation project(path: ':sdp-android')
+    api 'com.tencent:mmkv:1.3.1'
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+    implementation "androidx.lifecycle:lifecycle-process:2.6.2"
+
+    api 'com.google.android.gms:play-services-ads-identifier:18.2.0'
+    api 'com.google.android.gms:play-services-ads:23.6.0'
+    api 'com.google.firebase:firebase-ads:23.6.0'
+    api 'androidx.navigation:navigation-fragment-ktx:2.8.5'
+
+//    api 'com.airbnb.android:lottie:6.0.0'
+
+    // mediation
+//    implementation ('com.google.ads.mediation:facebook:6.16.0.0'){
+//        exclude group: 'com.google.zxing'
+//    }
+//    implementation 'com.google.ads.mediation:adcolony:4.8.0.2'
+//    implementation 'com.google.ads.mediation:applovin:11.11.3.0'
+//    implementation 'com.google.ads.mediation:vungle:7.0.0.0'
+//    implementation 'com.google.ads.mediation:pangle:5.5.0.4.0'
+//    implementation 'com.google.ads.mediation:mintegral:16.5.21.0'
+//    implementation 'com.google.ads.mediation:fyber:8.2.7.0'
+//
+//    api ('com.facebook.android:facebook-android-sdk:latest.release'){
+//        exclude group: 'com.google.zxing'
+//    }
+//    api 'com.appsflyer:af-android-sdk:6.12.1'
+//    api "com.android.installreferrer:installreferrer:2.2"
+//    api 'com.appsflyer:adrevenue:6.9.0'
+//    api 'com.appsflyer:purchase-connector:1.0.0'
+
+    api 'com.google.android.ump:user-messaging-platform:2.1.0'
+    api 'androidx.preference:preference:1.2.1'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = "com.github.triversoftLEVERIN"
+                artifactId = "Ads-SDK"
+                version = "1.2.2"
+            }
+        }
+    }
+}
+
+abstract class SDPFactory extends DefaultTask {
+
+    @Input
+    String unit = "dp"
+    @Input
+    double positiveMax = 600
+    @Input
+    double negativeMax = 60
+
+    @TaskAction
+    def create() {
+        String resFolder = project.getProjectDir().getPath() + "/src/main/res/"
+        for (double dimen = 300; dimen <= 1080; dimen = dimen + 30) {
+            String folder = resFolder + "values-sw" + (int) dimen + "dp"
+            String fileName = folder + "/positive_sdps.xml"
+            new File(folder).mkdir()
+            new File(fileName).createNewFile()
+            PrintWriter printWriter = new PrintWriter(fileName)
+            printWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+            printWriter.println("<resources>")
+            for (int i = 1; i <= positiveMax; i++) {
+                double ratio = i / 360d
+                double sdp = ratio * dimen
+                printWriter.printf("\t<dimen name=\"_%dsdp\">%.2f" + unit + "</dimen>\r\n", i, sdp)
+            }
+            printWriter.println("</resources>")
+            printWriter.close()
+        }
+        for (double dimen = 300; dimen <= 1080; dimen = dimen + 30) {
+            String folder = resFolder + "values-sw" + (int) dimen + "dp"
+            String fileName = folder + "/negative_sdps.xml"
+            new File(folder).mkdir()
+            new File(fileName).createNewFile()
+            PrintWriter printWriter = new PrintWriter(fileName)
+            printWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+            printWriter.println("<resources>")
+            for (int i = 1; i <= negativeMax; i++) {
+                double ratio = i / 360d
+                double sdp = ratio * dimen
+                printWriter.printf("\t<dimen name=\"_minus%dsdp\">%.2f" + unit + "</dimen>\r\n", i, -sdp)
+            }
+            printWriter.println("</resources>")
+            printWriter.close()
+        }
+    }
+}
+
+task createSDP(type: SDPFactory) {
+
+}
+
+createSDP {
+    unit = "dp"
+    positiveMax = 600//change to 600 or any other value if needed
+    negativeMax = 60//change to 600 or any other value if needed
+}
+
+
+abstract class SSPFactory extends DefaultTask {
+
+    @Input
+    String unit = "sp"
+    @Input
+    double positiveMax = 100
+
+    @TaskAction
+    def create() {
+        String resFolder = project.getProjectDir().getPath() + "/src/main/res/";
+        for (double dimen = 300; dimen <= 1080; dimen = dimen + 30) {
+            createPositive(resFolder, dimen)
+        }
+    }
+
+    private void createPositive(String resFolder, double dimen) {
+        String folder = resFolder + "values-sw" + (int) dimen + "dp";
+        String fileName = folder + "/positive_ssps.xml";
+        new File(folder).mkdir();
+        new File(fileName).createNewFile();
+        PrintWriter printWriter = new PrintWriter(fileName);
+        printWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        printWriter.println("<resources>");
+        for (int i = 1; i <= positiveMax; i++) {
+            double ratio = i / 360d;
+            double ssp = ratio * dimen;
+            printWriter.printf("\t<dimen name=\"_%dssp\">%.2f" + unit + "</dimen>\r\n", i, ssp);
+        }
+        printWriter.println("</resources>");
+        printWriter.close();
+    }
+}
+
+task createSSP(type: SSPFactory) {
+}
+
+
+createSSP {
+    unit = "sp"
+    positiveMax = 100
+}

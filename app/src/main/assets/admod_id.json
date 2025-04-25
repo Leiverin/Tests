@@ -1,0 +1,64 @@
+{
+  "listAds": [
+    {
+      "spaceName": "openSplash",
+      "adsType": "open_app",
+      "id": "ca-app-pub-5492359917524886/6007925014",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "openResume",
+      "adsType": "open_app",
+      "id": "ca-app-pub-5492359917524886/6451412600",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "interChung",
+      "adsType": "interstitial",
+      "id": "ca-app-pub-5492359917524886/5748705021",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "nativeLanguage",
+      "adsType": "native",
+      "id": "ca-app-pub-5492359917524886/9492508913",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "nativePermission",
+      "adsType": "native",
+      "id": "ca-app-pub-5492359917524886/9832899277",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "nativeDetector",
+      "adsType": "native",
+      "id": "ca-app-pub-5492359917524886/9739086770",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "nativeCompass",
+      "adsType": "native",
+      "id": "ca-app-pub-5492359917524886/3381761677",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "nativeHome",
+      "adsType": "native",
+      "id": "ca-app-pub-5492359917524886/8426005107",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "bannerCollapHome",
+      "adsType": "banner",
+      "id": "ca-app-pub-5492359917524886/5969675888",
+      "isEnable": "enable"
+    },
+    {
+      "spaceName": "nativeIntro",
+      "adsType": "native",
+      "id": "ca-app-pub-5492359917524886/7112923438",
+      "isEnable": "enable"
+    }
+  ]
+}

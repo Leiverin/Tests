@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+
+    <!-- Scale from 0.5 to 1.2 -->
+    <scale
+        android:duration="500"
+        android:fromXScale="0"
+        android:fromYScale="0"
+        android:toXScale="1.15"
+        android:toYScale="1.15"
+        android:pivotX="50%"
+        android:pivotY="50%" />
+
+    <!-- Scale from 1.2 to 1.0 smoothly -->
+    <scale
+        android:duration="500"
+        android:startOffset="550"
+        android:fromXScale="1.15"
+        android:fromYScale="1.15"
+        android:toXScale="1.0"
+        android:toYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%" />
+
+    <!-- Fade in effect -->
+    <alpha
+        android:duration="500"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0" />
+</set>

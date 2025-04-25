@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.0'
+    }
+}
+
+
+android {
+    compileSdk 33
+    namespace 'com.intuit.sdp'
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdk 33
+    }
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+//repositories {
+//    maven {
+//        url 'https://maven.google.com/'
+//    }
+//}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="resId"
+            type="int" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_85sdp"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@{isSelected ? @drawable/bg_language_selected : @drawable/bg_language_normal }"
+            android:onClick="@{onClick}"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                tools:src="@drawable/ic_english_flag"
+                drawableRes="@{resId}"
+                android:scaleType="fitXY"
+                />
+            
+            <TextView
+                style="@style/text_style_14_medium"
+                android:text="@{name}"
+                tools:text="@string/english"
+                android:textColor="@color/color_303030"
+                android:layout_marginTop="@dimen/_12sdp"
+                />
+
+        </LinearLayout>
+        
+        <ImageView
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_checked"
+            android:layout_gravity="end|top"
+            visible="@{isSelected}"
+            android:layout_margin="@dimen/_4sdp"/>
+
+    </androidx.cardview.widget.CardView>
+</layout>

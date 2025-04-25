@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ad_text_loading">Ads loading…</string>
+    <string name="ad_welcome_back">Welcome Back…</string>
+    <string name="ad_welcome_back_2">Welcome Back, everything is ready.</string>
+    <string name="go_to_app">Goto app now</string>
+    <string name="full_screen_ad_will_appear" translatable="false">Full screen ad coming soon</string>
+
+</resources>
