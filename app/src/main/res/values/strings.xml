@@ -49,4 +49,6 @@
     <string name="jellyfish">JellyFish\n</string>
     <string name="diary">Diary</string>
     <string name="sp_chat">To keep the app running, we show a few ads. But don’t worry! The longer you stay,\n the fewer ads you’ll see ♡</string>
+    <string name="write_your_diary">Write your diary</string>
+    <string name="time">Time</string>
 </resources>

@@ -23,8 +23,6 @@ abstract class BaseFragment<V : ViewDataBinding>(val layout_id:Int) : Fragment()
 
     lateinit var binding: V
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MultiLanguages.updateAppLanguage(context)

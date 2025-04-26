@@ -138,7 +138,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>( R.layout.fragment_sp
 
             override fun onFinish() {
                 if (!isNetworkAvailable){
-//                    moveFragment()
+                    moveFragment()
                 }
             }
         }.start()
