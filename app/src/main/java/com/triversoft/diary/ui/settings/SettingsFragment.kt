@@ -18,7 +18,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>( R.layout.fragmen
 
     override fun initView(view: View) {
         setBackPressListener(binding.btnBack) {
-    }
+        }
         initData()
         initRv()
     }

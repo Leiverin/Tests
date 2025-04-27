@@ -19,35 +19,33 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             YoYo.with(Techniques.Tada)
                 .duration(500)
                 .repeat(3)
-                .playOn(ivTutorial);
+                .playOn(ivTutorial)
 
             YoYo.with(Techniques.SlideInLeft)
                 .duration(500)
                 .repeat(0)
-                .playOn(lnCurrentSize);
+                .playOn(lnCurrentSize)
 
             YoYo.with(Techniques.SlideInRight)
                 .duration(500)
                 .repeat(0)
-                .playOn(lnCustom);
+                .playOn(lnCustom)
 
             YoYo.with(Techniques.SlideInUp)
                 .duration(500)
                 .repeat(0)
-                .playOn(rlSize13);
+                .playOn(rlSize13)
 
             YoYo.with(Techniques.SlideInUp)
                 .duration(700)
                 .repeat(0)
-                .playOn(rlSize16);
+                .playOn(rlSize16)
 
             YoYo.with(Techniques.SlideInUp)
                 .duration(1000)
                 .repeat(0)
-                .playOn(rlSize20);
-
+                .playOn(rlSize20)
             }
-
 
             lnCurrentSize.setPreventDoubleClick {
 
@@ -63,11 +61,9 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun initView(view: View) {
         setBackPressListener {
-        exitProcess(0)
-    }
+            exitProcess(0)
+        }
         initData()
-
-
     }
 
     override fun screenName(): String = "fragment_home"

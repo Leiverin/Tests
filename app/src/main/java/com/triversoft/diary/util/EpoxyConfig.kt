@@ -8,6 +8,8 @@ import com.triversoft.diary.R
         R.layout.item_language,
         R.layout.item_onboarding,
         R.layout.item_settings,
+        R.layout.item_mood,
+        R.layout.item_weather,
     ]
 )
 interface EpoxyConfig
