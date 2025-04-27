@@ -5,10 +5,21 @@
     <string name="next">Next</string>
     <string name="english">English</string>
     <string name="please_select_your_language">Please select your language</string>
-    <string name="string_content_onboarding_first"><font color="#000000">Suitable for all subjects, </font><font color="#4169E1">especially the elderly and people with eye problems</font></string>
-    <string name="string_content_onboarding_second"><font color="#000000">Improve your reading experience with </font><font color="#4169E1">up to 300% resizing</font></string>
-    <string name="string_content_onboarding_third"><font color="#000000">Easy to use and quick to change with </font><font color="#4169E1">just a few touches</font></string>
-    <string name="settings">Settings</string>
+     <string name="title_ob_1">Record your feelings</string>
+     <string name="title_ob_2">Unlock flexibly using</string>
+     <string name="title_ob_3">Create a separate folder</string>
+     <string name="title_ob_4">Choose theme</string>
+
+     <string name="content_ob_1">each day</string>
+     <string name="content_ob_2">a PIN, pattern,\n fingerprint, or Face ID</string>
+     <string name="content_ob_3">for each story</string>
+     <string name="content_ob_4">based on your mood</string>
+
+
+
+
+
+     <string name="settings">Settings</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="language">Language</string>
     <string name="share">Share %1s</string>
@@ -49,4 +60,5 @@
     <string name="jellyfish">JellyFish\n</string>
     <string name="diary">Diary</string>
     <string name="sp_chat">To keep the app running, we show a few ads. But don’t worry! The longer you stay,\n the fewer ads you’ll see ♡</string>
+    <string name="skip">Skip</string>
 </resources>

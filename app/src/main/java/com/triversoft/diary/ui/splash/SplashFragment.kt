@@ -16,7 +16,7 @@ import kotlin.math.abs
 class SplashFragment : BaseFragment<FragmentSplashBinding>( R.layout.fragment_splash) {
 
     companion object{
-        const val TIME_PROGRESS_SPLASH = 3000
+        const val TIME_PROGRESS_SPLASH = 7000
     }
 
     private var isNetworkAvailable: Boolean = false
@@ -125,7 +125,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>( R.layout.fragment_sp
 //            })
 //        }
 //        view?.postDelayed({
-        safeNav(R.id.splashFragment,R.id.action_splashFragment_to_languageFragment)
+        safeNav(R.id.splashFragment,R.id.action_splashFragment_to_onboardingFragment)
 //                          },3000)
     }
 
@@ -137,9 +137,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>( R.layout.fragment_sp
             }
 
             override fun onFinish() {
-                if (!isNetworkAvailable){
-//                    moveFragment()
-                }
+//                if (!isNetworkAvailable){
+                    moveFragment()
+//                }
             }
         }.start()
     }

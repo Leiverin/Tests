@@ -3,6 +3,7 @@ package com.triversoft.diary.util
 import android.content.Context
 import com.triversoft.diary.R
 import com.triversoft.diary.data.models.Language
+import com.triversoft.diary.data.models.ThemeObj
 
 object CommonData {
 
@@ -24,20 +25,57 @@ object CommonData {
     )
 
     fun onboardings(context: Context) = arrayListOf(
-        Pair(
-            R.drawable.on_broading_1,
-            R.string.string_content_onboarding_first
+        Triple(
+            R.drawable.iv_ob_1,
+            R.string.title_ob_1,
+            R.string.content_ob_1
         ),
-        Pair(
-            R.drawable.on_broading_2,
-          R.string.string_content_onboarding_second
+        Triple(
+            R.drawable.iv_ob_2,
+          R.string.title_ob_2,
+            R.string.content_ob_2
         ),
-        Pair(
-            R.drawable.on_broading_3,
- R.string.string_content_onboarding_third
+        Triple(
+            R.drawable.iv_ob_3,
+           R.string.title_ob_3,
+            R.string.content_ob_3
+        ),
+        Triple(
+            R.drawable.iv_ob_4,
+           R.string.title_ob_4,
+            R.string.content_ob_4
         ),
     )
 
+    fun themes(context: Context) = arrayListOf(
+        ThemeObj(
+            "1",R.drawable.iv_theme_1,"Light",false
+        ),
+        ThemeObj(
+            "2",R.drawable.iv_theme_2,"Dark",true
+        ),
+        ThemeObj(
+            "3",R.drawable.iv_theme_3,"Heart Bloom",false
+        ),
+        ThemeObj(
+            "4",R.drawable.iv_theme_4,"Cloud Field",false
+        ),
+        ThemeObj(
+            "5",R.drawable.iv_theme_5,"Starry Dream",false
+        ),
+        ThemeObj(
+            "6",R.drawable.iv_theme_6,"Jelly Sea",false
+        ),
+        ThemeObj(
+            "7",R.drawable.iv_theme_7,"Sunny Joy",false
+        ),
+        ThemeObj(
+            "8",R.drawable.iv_theme_8,"Cosmic Night",false
+        ),
+        ThemeObj(
+            "9",R.drawable.iv_theme_9,"Evening Stop",false
+        )
+    )
     fun suggestion(context: Context) = arrayListOf(
         Triple(
             R.drawable.sg_1,
