@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        
+        <variable
+            name="resId"
+            type="int" />
+
+        <variable
+            name="isPro"
+            type="Boolean" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:onClick="@{onClick}"
+            >
+
+            <ImageView
+                android:id="@+id/imgOnboarding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:adjustViewBounds="true"
+                tools:src="@drawable/iv_theme_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                drawableRes="@{resId}"
+                />
+            <View
+                android:id="@+id/topIv"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                app:layout_constraintBottom_toTopOf="@id/imgOnboarding"
+                />
+            <ImageView
+                android:id="@+id/ivTagPro"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                tools:src="@drawable/iv_them_pro_tag"
+                app:layout_constraintTop_toTopOf="@id/topIv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/_16sdp"
+                drawable="@{@drawable/iv_them_pro_tag}"
+                visible="@{isPro}"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

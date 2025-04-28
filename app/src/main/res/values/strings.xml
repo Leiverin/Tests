@@ -61,4 +61,8 @@
     <string name="diary">Diary</string>
     <string name="sp_chat">To keep the app running, we show a few ads. But don’t worry! The longer you stay,\n the fewer ads you’ll see ♡</string>
     <string name="skip">Skip</string>
+    <string name="choose_theme">Choose Theme</string>
+    <string name="des_theme_pro">Watch an ad to unlock this theme — or upgrade to Pro for full access!</string>
+    <string name="unlock_now">Unlock now</string>
+    <string name="go_pro">Go Pro</string>
 </resources>

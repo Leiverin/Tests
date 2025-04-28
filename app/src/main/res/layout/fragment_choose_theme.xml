@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.triversoft.diary.ui.onboarding.OnboardingFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        >
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/text_style_16_bold"
+            android:textColor="@color/white"
+            android:text="@string/choose_theme"
+            android:layout_gravity="end"
+            android:padding="@dimen/_16sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/btnSkip"
+            style="@style/text_style_16_bold"
+            android:textColor="@color/white"
+            android:text="@string/skip"
+            android:layout_gravity="end"
+            android:background="@drawable/bg_btn_ripple_transparent"
+            android:padding="@dimen/_16sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pagerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/_24sdp"
+            android:layout_marginBottom="@dimen/_24sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvNameTheme"
+            />
+
+
+        <TextView
+            android:id="@+id/tvNameTheme"
+            style="@style/text_style_16_bold"
+            android:textColor="@color/white"
+            android:text="@string/choose_theme"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/viewColorTheme"
+            />
+
+
+        <View
+            android:id="@+id/viewColorTheme"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_radius_12"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/btnApply"
+            android:layout_marginBottom="@dimen/_24sdp"
+            />
+ 
+        <LinearLayout
+            android:id="@+id/btnApply"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_44sdp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:layout_marginHorizontal="@dimen/_56sdp"
+            android:backgroundTint="@color/color_FFD901"
+            android:background="@drawable/bg_radius_12"
+            app:layout_constraintBottom_toBottomOf="@id/tvDesThemePro"
+            >
+
+
+            <TextView
+                style="@style/text_style_16_bold"
+                android:textColor="@color/white"
+                android:text="@string/apply"
+                />
+            <ImageView
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/ic_tick"
+                android:layout_marginStart="@dimen/_12sdp"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvDesThemePro"
+            style="@style/text_style_14_regular"
+            android:textColor="@color/white"
+            android:text="@string/des_theme_pro"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_marginBottom="@dimen/_24sdp"
+            android:layout_marginHorizontal="@dimen/_36sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnGoPro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+
+
+        <TextView
+            android:id="@+id/btnWatchAds"
+            android:layout_width="0dp"
+            style="@style/text_style_16_bold"
+            android:layout_height="@dimen/_44sdp"
+            android:text="@string/unlock_now"
+            android:gravity="center"
+            android:background="@drawable/bg_radius_12"
+            android:backgroundTint="#2A2A2E"
+            android:layout_marginStart="@dimen/_16sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnGoPro"
+            app:layout_constraintBottom_toBottomOf="@id/btnGoPro"
+            />
+        <LinearLayout
+            android:id="@+id/btnGoPro"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_44sdp"
+            android:layout_marginBottom="@dimen/_32sdp"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/bg_radius_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnWatchAds"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+
+            <TextView
+                style="@style/text_style_16_bold"
+                android:textColor="@color/black"
+                android:text="@string/go_pro"
+                />
+            <ImageView
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/ic_pro"
+                android:layout_marginStart="@dimen/_12sdp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

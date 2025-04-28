@@ -4,5 +4,7 @@ data class ThemeObj (
     val id: String,
     val avatar: Int,
     val name: String,
-    val isDark: Boolean,
+    val colorTheme:String,
+    val isPro: Boolean,
+    val isBuy: Boolean,
 )
