@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.PopupWindow
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.triversoft.diary.R
 import com.triversoft.diary.databinding.LayoutOptionDiaryBinding
 import com.triversoft.diary.extension.screenWidth
@@ -28,6 +29,7 @@ class AddContentPopup @JvmOverloads constructor(
         setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         contentView = binding.root
         width = screenWidth
+        height = ConstraintLayout.LayoutParams.WRAP_CONTENT
         animationStyle = R.style.PopupAnimation
         isFocusable = true
         binding.btnTextbox.setPreventDoubleClick {
