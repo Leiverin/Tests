@@ -54,19 +54,20 @@
                     tools:text="Record your feelings "
                      android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/playwrite_regular"
                     android:textSize="@dimen/_24ssp"
                     />
                 <TextView
                     android:text="@{content}"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:layout_marginHorizontal="@dimen/_16sdp"
                     android:layout_marginVertical="@dimen/_12sdp"
-                    tools:text="@string/string_content_onboarding_first"
+                    tools:text="@string/ad_welcome_back_2"
                      android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_bold"
+                    android:fontFamily="@font/nunito_bold"
                     android:textSize="@dimen/_20ssp"
                     />
 

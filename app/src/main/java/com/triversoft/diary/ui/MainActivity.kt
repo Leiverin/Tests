@@ -20,7 +20,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.main_nav)
         val navController = navHostFragment.navController
-            graph.setStartDestination(R.id.chooseThemeFragment)
+            graph.setStartDestination(R.id.homeFragment)
         navController.setGraph(graph, null)
     }
 

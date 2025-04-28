@@ -14,6 +14,7 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/text_style_16_bold"
+            android:fontFamily="@font/playwrite_regular"
             android:textColor="@color/white"
             android:text="@string/choose_theme"
             android:layout_gravity="end"
