@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="isPro"
+            type="Boolean" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56sdp"
+            >
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/text_style_20_bold"
+                android:fontFamily="@font/playwrite_regular"
+                android:textColor="@color/black"
+                android:text="@string/title_home"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_gravity="end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/ivTagPro"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:adjustViewBounds="true"
+                tools:src="@drawable/ic_pro"
+                android:padding="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                drawable="@{@drawable/iv_them_pro_tag}"
+                visible="@{isPro}"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="@{onClick}"
+                />
+
+
+
+        </RelativeLayout>
+
+</layout>
