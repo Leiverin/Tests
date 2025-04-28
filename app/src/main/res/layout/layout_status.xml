@@ -6,26 +6,32 @@
     <data>
 
     </data>
-
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_2sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_20sdp"
-        >
+        android:layout_height="wrap_content">
 
-        <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/rvStatus"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/_12sdp"
-            android:paddingVertical="@dimen/_16sdp"
-            tools:listitem="@layout/item_mood"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="6"
-            />
+            app:cardElevation="@dimen/_2sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginVertical="@dimen/_4sdp"
+            >
 
-    </androidx.cardview.widget.CardView>
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:paddingVertical="@dimen/_16sdp"
+                tools:listitem="@layout/item_mood"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="6"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
 </layout>

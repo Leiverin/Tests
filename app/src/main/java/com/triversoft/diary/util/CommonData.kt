@@ -54,13 +54,13 @@ object CommonData {
         Pair(5, R.drawable.ic_cry_mood),
     )
 
-    fun weatherData(context: Context) = arrayListOf(
-        Triple(0, context.getString(R.string.sunny), R.drawable.ic_sunny),
-        Triple(1, context.getString(R.string.rainy), R.drawable.ic_ranny),
-        Triple(2, context.getString(R.string.cloudy), R.drawable.ic_cloudy),
-        Triple(3, context.getString(R.string.foggy), R.drawable.ic_foggy),
-        Triple(4, context.getString(R.string.cold), R.drawable.ic_cold),
-        Triple(5, context.getString(R.string.windy), R.drawable.ic_windy),
+    fun weatherData(context: Context? = null) = arrayListOf(
+        Triple(0, context?.getString(R.string.sunny) ?: "Sunny", R.drawable.ic_sunny),
+        Triple(1, context?.getString(R.string.rainy) ?: "Rainy", R.drawable.ic_ranny),
+        Triple(2, context?.getString(R.string.cloudy) ?: "Cloudy", R.drawable.ic_cloudy),
+        Triple(3, context?.getString(R.string.foggy) ?: "Foggy", R.drawable.ic_foggy),
+        Triple(4, context?.getString(R.string.cold) ?: "Cold", R.drawable.ic_cold),
+        Triple(5, context?.getString(R.string.windy) ?: "Windy", R.drawable.ic_windy),
     )
 
 }

@@ -9,7 +9,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.bumptech.glide.Glide
+import com.triversoft.diary.itemPhotoSelected
 import java.io.File
 import java.nio.ByteBuffer
 
@@ -122,4 +124,44 @@ fun View.onPreventDoubleClick(action: () -> Any?){
             this.postDelayed({this.isEnabled = true}, 500)
         }
     }
+}
+
+@BindingAdapter(
+    value = ["fillData", "onClickPath"],
+    requireAll = true
+)
+fun EpoxyRecyclerView.fillData(list: List<String>, onClickPath: (String) -> Unit){
+    withModels {
+        list.forEachIndexed { index, s ->
+            itemPhotoSelected {
+                id(index)
+                path(s)
+                isDefault(s == Constants.DEFAULT)
+                onClick { _ ->
+                    onClickPath.invoke(s)
+                }
+            }
+        }
+    }
+}
+
+@BindingAdapter("loadDrawableWithAnim")
+fun ImageView.loadDrawableWithAnim(resId: Int){
+    animate().cancel()
+    this.animate()
+        .alpha(0f)
+        .scaleY(0f)
+        .scaleX(0f)
+        .setDuration(150)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                Glide.with(context).load(resId).into(this@loadDrawableWithAnim)
+                this@loadDrawableWithAnim.animate()
+                    .alpha(1f)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(150)
+            }
+        })
 }

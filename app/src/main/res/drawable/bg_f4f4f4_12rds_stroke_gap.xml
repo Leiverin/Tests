@@ -18,6 +18,12 @@
         <shape>
             <solid android:color="@color/color_F4F4F4"/>
             <corners android:radius="@dimen/_12sdp"/>
+            <stroke
+                android:color="@color/color_6B6B6B"
+                android:width="@dimen/_1sdp"
+                android:dashWidth="@dimen/_4sdp"
+                android:dashGap="@dimen/_3sdp"
+                />
         </shape>
     </item>
 </ripple>

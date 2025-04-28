@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_4sdp"
         android:onClick="@{onClick}"
+        android:background="@drawable/bg_btn_ripple_square_transparent"
         >
         <LinearLayout
             android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
                 />
 
             <TextView
-                style="@style/text_style_12_bold"
+                style="@style/text_style_12_semi_bold"
                 tools:text="Sunny"
                 android:text="@{name}"
                 android:layout_marginTop="@dimen/_4sdp"

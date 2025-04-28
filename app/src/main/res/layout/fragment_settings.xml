@@ -24,7 +24,7 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:background="@drawable/bg_btn_ripple_transparent"
+                android:background="@drawable/bg_btn_ripple_rounded_transparent"
                 >
                 <ImageView
                     android:layout_width="@dimen/_24sdp"

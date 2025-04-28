@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <variable
+            name="list"
+            type="List&lt;String>" />
+
+        <variable
+            name="onClickPhoto"
+            type="kotlin.jvm.functions.Function1&lt;String, kotlin.Unit>" />
+
+        <variable
+            name="onCancel"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/_128sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/bg_stroke_6b6b6b_12rds"
+            >
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rvPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:paddingVertical="@dimen/_16sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                tools:listitem="@layout/item_photo_selected"
+                fillData="@{list}"
+                onClickPath="@{onClickPhoto}"
+                />
+
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_delete_view"
+            android:layout_gravity="end"
+            android:onClick="@{onCancel}"
+            />
+
+    </FrameLayout>
+</layout>

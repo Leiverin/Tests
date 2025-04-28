@@ -14,334 +14,482 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/_16sdp"
         android:background="@color/white"
         >
-
-        <RelativeLayout
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_12sdp"
-            >
-
-            <RelativeLayout
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/_24sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:src="@drawable/ic_back"
-                    app:tint="@color/black"
-                    android:scaleType="fitXY"
-                    />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tvTitle"
-                style="@style/text_style_16_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/btnBack"
-                android:layout_alignBottom="@+id/btnBack"
-                android:layout_toEndOf="@+id/btnBack"
-                android:gravity="center|start"
-                android:text="@string/write_your_diary"
-                android:textColor="@color/color_171717"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:singleLine="true"
-                android:ellipsize="end"
-                />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitle"
-                android:layout_toEndOf="@+id/btnBack"
-                android:layout_marginTop="@dimen/_4sdp"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvColor"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    app:cardBackgroundColor="#59B5C9"
-                    app:cardCornerRadius="@dimen/_2sdp"
-                    app:cardElevation="0dp" />
-
-                <TextView
-                    android:id="@+id/tvDes"
-                    style="@style/text_style_12_regular"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:text="Etiam lobortis aliquet"
-                    android:textColor="@color/color_6B6B6B" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toTopOf="@+id/viewBottom"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingHorizontal="@dimen/_16sdp"
             >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <RelativeLayout
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 >
 
-                <LinearLayout
-                    android:id="@+id/viewHeader"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_back"
+                        app:tint="@color/black"
+                        android:scaleType="fitXY"
+                        />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    style="@style/text_style_16_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/btnBack"
+                    android:layout_alignBottom="@+id/btnBack"
+                    android:layout_toEndOf="@+id/btnBack"
+                    android:gravity="center|start"
+                    android:text="@string/write_your_diary"
+                    android:textColor="@color/color_171717"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
+                    android:layout_toEndOf="@+id/btnBack"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    >
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvColor"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        app:cardBackgroundColor="#59B5C9"
+                        app:cardCornerRadius="@dimen/_2sdp"
+                        app:cardElevation="0dp" />
+
+                    <TextView
+                        android:id="@+id/tvDes"
+                        style="@style/text_style_12_regular"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:text="Etiam lobortis aliquet"
+                        android:textColor="@color/color_6B6B6B" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_2sdp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="@dimen/_24sdp"
                     >
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/viewHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        >
 
-                        <TextView
-                            android:id="@+id/tvTitleTime"
-                            style="@style/text_style_12_regular"
-                            android:textColor="@color/color_6B6B6B"
-                            android:text="@string/time"
-                            />
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvTitleTime"
+                                style="@style/text_style_12_regular"
+                                android:textColor="@color/color_6B6B6B"
+                                android:text="@string/time"
+                                />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_12sdp"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_below="@id/tvTitleTime"
+                                >
+
+                                <TextView
+                                    style="@style/text_style_12_bold"
+                                    android:text="11:20"
+                                    android:paddingHorizontal="@dimen/_8sdp"
+                                    android:paddingVertical="@dimen/_4sdp"
+                                    android:textColor="@color/color_6B6B6B"
+                                    android:background="@drawable/bg_f4f4f4_rounded"
+                                    />
+
+                                <TextView
+                                    style="@style/text_style_12_bold"
+                                    android:text="27/02/2025"
+                                    android:background="@drawable/bg_f4f4f4_rounded"
+                                    android:layout_marginStart="@dimen/_2sdp"
+                                    android:textColor="@color/color_6B6B6B"
+                                    android:paddingHorizontal="@dimen/_8sdp"
+                                    android:paddingVertical="@dimen/_4sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_12sdp"
+                            android:orientation="vertical"
+                            android:gravity="center"
                             android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_below="@id/tvTitleTime"
                             >
 
                             <TextView
-                                style="@style/text_style_12_bold"
-                                android:text="11:20"
-                                android:paddingHorizontal="@dimen/_8sdp"
-                                android:paddingVertical="@dimen/_4sdp"
+                                android:id="@+id/tvTitleMood"
+                                style="@style/text_style_12_regular"
                                 android:textColor="@color/color_6B6B6B"
-                                android:background="@drawable/bg_f4f4f4_rounded"
+                                android:text="@string/mood"
                                 />
 
-                            <TextView
-                                style="@style/text_style_12_bold"
-                                android:text="27/02/2025"
-                                android:background="@drawable/bg_f4f4f4_rounded"
-                                android:layout_marginStart="@dimen/_2sdp"
-                                android:textColor="@color/color_6B6B6B"
-                                android:paddingHorizontal="@dimen/_8sdp"
-                                android:paddingVertical="@dimen/_4sdp"
-                                />
+                            <FrameLayout
+                                android:id="@+id/viewMood"
+                                android:layout_width="@dimen/_32sdp"
+                                android:layout_height="@dimen/_32sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                >
+
+                                <View
+                                    android:id="@+id/viewMoodEmpty"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    visible="@{viewModel.dairyCurrent.mood == null}"
+                                    android:background="@drawable/bg_f4f4f4_12rds_stroke_gap"
+                                    />
+
+                                <FrameLayout
+                                    android:id="@+id/viewMoodSrc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    visible="@{viewModel.dairyCurrent.mood != null}"
+                                    android:background="@drawable/bg_white_12rds_stroke"
+                                    >
+
+                                    <ImageView
+                                        android:id="@+id/imgMood"
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:scaleType="fitXY"
+                                        tools:src="@drawable/ic_angry_mood"
+                                        android:layout_gravity="center"
+                                        />
+
+                                </FrameLayout>
+
+                            </FrameLayout>
 
                         </LinearLayout>
 
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        >
-
-                        <TextView
-                            android:id="@+id/tvTitleMood"
-                            style="@style/text_style_12_regular"
-                            android:textColor="@color/color_6B6B6B"
-                            android:text="@string/mood"
-                            />
-
-                        <FrameLayout
-                            android:id="@+id/viewMood"
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_8sdp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
                             >
 
-                            <View
-                                android:id="@+id/viewMoodEmpty"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/bg_f4f4f4_12rds_stroke_gap"
+                            <TextView
+                                android:id="@+id/tvTitleWeather"
+                                style="@style/text_style_12_regular"
+                                android:textColor="@color/color_6B6B6B"
+                                android:text="@string/weather"
                                 />
 
                             <FrameLayout
-                                android:id="@+id/viewMoodSrc"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/bg_f4f4f4_12rds_stroke"
+                                android:id="@+id/viewWeather"
+                                android:layout_width="@dimen/_32sdp"
+                                android:layout_height="@dimen/_32sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
                                 >
 
-                                <ImageView
-                                    android:id="@+id/imgMood"
-                                    android:layout_width="@dimen/_28sdp"
-                                    android:layout_height="@dimen/_28sdp"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/ic_angry_mood"
-                                    android:layout_gravity="center"
+                                <View
+                                    android:id="@+id/viewWeatherEmpty"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/bg_f4f4f4_12rds_stroke_gap"
+                                    visible="@{viewModel.dairyCurrent.weather == null}"
                                     />
+
+                                <FrameLayout
+                                    android:id="@+id/viewWeatherSrc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    visible="@{viewModel.dairyCurrent.weather != null}"
+                                    android:background="@drawable/bg_white_12rds_stroke"
+                                    >
+
+                                    <ImageView
+                                        android:id="@+id/imgWeather"
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:scaleType="fitXY"
+                                        tools:src="@drawable/ic_sunny"
+                                        android:layout_gravity="center"
+                                        />
+
+                                </FrameLayout>
 
                             </FrameLayout>
 
-                        </FrameLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        >
-
-                        <TextView
-                            android:id="@+id/tvTitleWeather"
-                            style="@style/text_style_12_regular"
-                            android:textColor="@color/color_6B6B6B"
-                            android:text="@string/weather"
-                            />
-
-                        <FrameLayout
-                            android:id="@+id/viewWeather"
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            >
-
-                            <View
-                                android:id="@+id/viewWeatherEmpty"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/bg_f4f4f4_12rds_stroke_gap"
-                                />
-
-                            <FrameLayout
-                                android:id="@+id/viewWeatherSrc"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/bg_f4f4f4_12rds_stroke"
-                                >
-
-                                <ImageView
-                                    android:id="@+id/imgWeather"
-                                    android:layout_width="@dimen/_28sdp"
-                                    android:layout_height="@dimen/_28sdp"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/ic_angry_mood"
-                                    android:layout_gravity="center"
-                                    />
-
-                            </FrameLayout>
-
-                        </FrameLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/edTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_39sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/viewHeader"
-                    android:background="@color/white"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:textColor="@color/color_171717"
-                    style="@style/text_style_18_regular"
-                    android:textColorHint="@color/color_6B6B6B"
-                    android:hint="@string/title"
-                    android:textCursorDrawable="@drawable/cursor_edit_text"
-                    android:paddingHorizontal="@dimen/_8sdp"
-                    />
-
-                <com.triversoft.diary.ui.views.LineDashGapView
-                    android:id="@+id/viewSeparate"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/edTitle"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:ldgv_dash_width="@dimen/_4sdp"
-                    app:ldgv_dash_gap="@dimen/_5sdp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_44sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/viewSeparate"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_24sdp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/bg_e2f2ff_12rds"
-                    android:gravity="center"
-                    >
-
-                    <ImageView
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
-                        android:src="@drawable/ic_plus"
-                        android:scaleType="centerCrop"
-                        />
-
-                    <TextView
-                        style="@style/text_style_14_bold"
-                        android:text="@string/tap_to_add_more_content"
-                        android:layout_marginStart="@dimen/_10sdp"
+                    <EditText
+                        android:id="@+id/edTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_39sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
+                        android:background="@color/white"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/color_171717"
+                        style="@style/text_style_18_bold"
+                        android:textColorHint="@color/color_6B6B6B"
+                        android:hint="@string/title"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+                        android:paddingHorizontal="@dimen/_8sdp"
                         />
 
-                </LinearLayout>
+                    <com.triversoft.diary.ui.views.LineDashGapView
+                        android:id="@+id/viewSeparate"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/edTitle"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:ldgv_dash_width="@dimen/_4sdp"
+                        app:ldgv_dash_gap="@dimen/_5sdp"
+                        />
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@+id/viewSeparate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:clipToPadding="false"
+                        android:paddingBottom="@dimen/_32sdp"
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.airbnb.epoxy.EpoxyRecyclerView
+                                android:id="@+id/rvContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_marginTop="@dimen/_12sdp"
+                                tools:listitem="@layout/item_textbox"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                android:orientation="vertical"
+                                />
+
+                            <LinearLayout
+                                android:id="@+id/btnAddContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_44sdp"
+                                android:background="@drawable/bg_e2f2ff_12rds"
+                                android:gravity="center"
+                                android:layout_marginTop="@dimen/_24sdp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/rvContent">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_12sdp"
+                                    android:layout_height="@dimen/_12sdp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_plus" />
+
+                                <TextView
+                                    style="@style/text_style_14_bold"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:text="@string/tap_to_add_more_content"
+                                    android:textColor="@color/color_171717" />
+
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.core.widget.NestedScrollView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewBottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="360: 93"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:cardElevation="@dimen/_10sdp"
             >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
 
-                <
+                <RelativeLayout
+                    android:id="@+id/btnEdit"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_edit"
+                        app:tint="#292D32"
+                        android:scaleType="centerCrop"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnAddImage"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_6sdp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_add_image"
+                        android:scaleType="centerCrop"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnAddCbx"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_6sdp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_add_cbx"
+                        android:scaleType="centerCrop"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnAddText"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_6sdp"
+                    android:background="@drawable/bg_ripple_circle_transparent"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_add_text"
+                        android:scaleType="centerCrop"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_weight="1"/>
+                
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_48sdp"
+                    android:minWidth="@dimen/_72sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:background="@drawable/bg_171717_12rds"
+                    >
+
+                    <TextView
+                        style="@style/text_style_14_bold"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:singleLine="true"
+                        android:text="@string/save"
+                        />
+
+                </FrameLayout>
 
             </LinearLayout>
 
-        </FrameLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

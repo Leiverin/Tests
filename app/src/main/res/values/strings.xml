@@ -60,5 +60,11 @@
     <string name="foggy">Foggy</string>
     <string name="cold">Cold</string>
     <string name="windy">Windy</string>
-    <string name="title">Title...</string>
+    <string name="title">Title…</string>
+    <string name="save">Save</string>
+    <string name="textbox">Textbox</string>
+    <string name="image">Image</string>
+    <string name="checkbox">Checkbox</string>
+    <string name="your_text_here">Your text here …</string>
+    <string name="upload_image">Upload image</string>
 </resources>

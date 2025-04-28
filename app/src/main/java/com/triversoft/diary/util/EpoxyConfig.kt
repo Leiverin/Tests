@@ -10,6 +10,10 @@ import com.triversoft.diary.R
         R.layout.item_settings,
         R.layout.item_mood,
         R.layout.item_weather,
+        R.layout.item_checkbox,
+        R.layout.item_textbox,
+        R.layout.item_list_photo_selected,
+        R.layout.item_photo_selected,
     ]
 )
 interface EpoxyConfig

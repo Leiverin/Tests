@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Diary Jellyfish"
+rootProject.name = "Drawing"
 include ':app'
 include ':sdp-android'
 include ':libAds'
