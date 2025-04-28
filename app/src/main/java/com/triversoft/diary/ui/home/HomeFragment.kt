@@ -16,47 +16,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun initData() {
         binding.apply {
             view?.post {
-            YoYo.with(Techniques.Tada)
-                .duration(500)
-                .repeat(3)
-                .playOn(ivTutorial);
-
-            YoYo.with(Techniques.SlideInLeft)
-                .duration(500)
-                .repeat(0)
-                .playOn(lnCurrentSize);
-
-            YoYo.with(Techniques.SlideInRight)
-                .duration(500)
-                .repeat(0)
-                .playOn(lnCustom);
-
-            YoYo.with(Techniques.SlideInUp)
-                .duration(500)
-                .repeat(0)
-                .playOn(rlSize13);
-
-            YoYo.with(Techniques.SlideInUp)
-                .duration(700)
-                .repeat(0)
-                .playOn(rlSize16);
-
-            YoYo.with(Techniques.SlideInUp)
-                .duration(1000)
-                .repeat(0)
-                .playOn(rlSize20);
-
-            }
-
-
-            lnCurrentSize.setPreventDoubleClick {
-
-            }
-            rlCurrentSize.setPreventDoubleClick {
-
-            }
-            btnTutorial.setPreventDoubleClick {
-            }
+        }
         }
     }
 
