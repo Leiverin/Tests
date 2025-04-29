@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/btnAddContent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44sdp"
+        android:background="@drawable/bg_e2f2ff_12rds"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="@{onClick}"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_plus" />
+
+        <TextView
+            style="@style/text_style_14_bold"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/tap_to_add_more_content"
+            android:textColor="@color/color_171717" />
+
+    </LinearLayout>
+
+</layout>

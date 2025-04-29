@@ -5,18 +5,24 @@
 
         <variable
             name="description"
-            type="Boolean" />
+            type="String" />
         
         <variable
             name="onCancel"
             type="android.view.View.OnClickListener" />
-        
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp">
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:onClick="@{onClick}"
+        >
 
         <EditText
             android:layout_width="match_parent"
@@ -27,9 +33,13 @@
             android:textColorHint="@color/color_6B6B6B"
             android:hint="@string/your_text_here"
             android:gravity="top"
+            android:text="@{description}"
+            android:enabled="false"
             style="@style/text_style_12_regular"
             android:textColor="@color/color_171717"
             android:layout_marginTop="@dimen/_12sdp"
+            android:textCursorDrawable="@drawable/cursor_edit_text"
+            android:textColorHighlight="@color/color_171717_40"
             />
 
         <ImageView

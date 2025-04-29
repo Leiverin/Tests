@@ -1,10 +1,14 @@
 package com.triversoft.diary.ui
 
 import android.content.Context
+import android.graphics.Rect
+import android.view.MotionEvent
+import android.widget.EditText
 import androidx.navigation.fragment.NavHostFragment
 import com.hjq.language.MultiLanguages
 import com.triversoft.diary.R
 import com.triversoft.diary.databinding.ActivityMainBinding
+import com.triversoft.diary.extension.hideKeyboard
 import com.triversoft.diary.ui.base.BaseActivity
 
 class MainActivity: BaseActivity<ActivityMainBinding>() {
@@ -33,5 +37,21 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
             super.attachBaseContext(MultiLanguages.attach(newBase))
         }
     }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    v.clearFocus()
+                    v.hideKeyboard()
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
 
 }

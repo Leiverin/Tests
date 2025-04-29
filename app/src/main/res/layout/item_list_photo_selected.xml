@@ -16,6 +16,10 @@
             type="kotlin.jvm.functions.Function1&lt;String, kotlin.Unit>" />
 
         <variable
+            name="onRemovePhoto"
+            type="kotlin.jvm.functions.Function1&lt;String, kotlin.Unit>" />
+
+        <variable
             name="onCancel"
             type="android.view.View.OnClickListener" />
 
@@ -46,6 +50,7 @@
                 tools:listitem="@layout/item_photo_selected"
                 fillData="@{list}"
                 onClickPath="@{onClickPhoto}"
+                onRemovePhoto="@{onRemovePhoto}"
                 />
 
         </FrameLayout>

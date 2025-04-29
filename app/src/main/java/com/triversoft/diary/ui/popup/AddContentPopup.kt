@@ -1,8 +1,3 @@
-/**
- * @author Boom Team
- * Created 4/28/2025 at 9:47 AM
- */
-
 package com.triversoft.diary.ui.popup
 
 import android.content.Context
@@ -14,6 +9,7 @@ import android.widget.PopupWindow
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.triversoft.diary.R
 import com.triversoft.diary.databinding.LayoutOptionDiaryBinding
+import com.triversoft.diary.extension.onGlobalLayout
 import com.triversoft.diary.extension.screenWidth
 import com.triversoft.diary.extension.setPreventDoubleClick
 
@@ -22,14 +18,14 @@ class AddContentPopup @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : PopupWindow(context, attrs) {
 
-    private val binding = LayoutOptionDiaryBinding.inflate(LayoutInflater.from(context))
+    private val binding = LayoutOptionDiaryBinding.inflate(context.applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
     var onEventAddContentListener: IOnEventAddContentListener? = null
 
     init {
         setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         contentView = binding.root
-        width = screenWidth
-        height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+        width = ConstraintLayout.LayoutParams.MATCH_PARENT
+        height = context.resources.getDimension(com.intuit.sdp.R.dimen._95sdp).toInt()
         animationStyle = R.style.PopupAnimation
         isFocusable = true
         binding.btnTextbox.setPreventDoubleClick {

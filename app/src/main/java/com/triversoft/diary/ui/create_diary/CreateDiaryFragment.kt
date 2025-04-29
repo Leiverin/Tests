@@ -1,5 +1,7 @@
 package com.triversoft.diary.ui.create_diary
 
+import android.animation.LayoutTransition
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -10,10 +12,11 @@ import com.triversoft.diary.R
 import com.triversoft.diary.data.models.ContentType
 import com.triversoft.diary.data.models.DiaryModel
 import com.triversoft.diary.databinding.FragmentCreateDairyBinding
+import com.triversoft.diary.extension.makeDelay
+import com.triversoft.diary.extension.onGlobalLayout
 import com.triversoft.diary.extension.setBackPressListener
 import com.triversoft.diary.extension.setPreventDoubleClick
 import com.triversoft.diary.extension.toPath
-import com.triversoft.diary.extension.toast
 import com.triversoft.diary.itemCheckbox
 import com.triversoft.diary.itemListPhotoSelected
 import com.triversoft.diary.itemTextbox
@@ -23,7 +26,7 @@ import com.triversoft.diary.ui.popup.StatusPopup
 import com.triversoft.diary.util.Constants
 import com.triversoft.diary.util.loadDrawableWithAnim
 
-class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R.layout.fragment_create_dairy),
+class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fragment_create_dairy),
     AddContentPopup.IOnEventAddContentListener {
 
     private val viewModel: CreateDiaryViewModel by viewModels()
@@ -36,10 +39,9 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R.layout.fra
             context?.let { context ->
                 uri.toPath(context)?.let { path ->
                     viewModel.updateContentImage(path)
+                    controller.requestDelayedModelBuild(150)
                 }
             }
-        }else{
-            context?.toast("Not found photos")
         }
     }
 
@@ -52,17 +54,15 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R.layout.fra
 
     private fun observerData() {
         viewModel.liveContents.observe(viewLifecycleOwner){ list ->
-            viewModel.contents.clear()
-            viewModel.contents.addAll(list)
             binding.rvContent.requestModelBuild()
         }
     }
 
     private fun initData() {
-        initRvContent()
+        initRvContent(controller)
     }
 
-    private fun initRvContent() {
+    private fun initRvContent(controller: EpoxyController) {
         EpoxyTouchHelper.initDragging(controller)
             .withRecyclerView(binding.rvContent)
             .forVerticalList()
@@ -78,49 +78,79 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R.layout.fra
             modelBeingMoved: EpoxyModel<*>?,
             itemView: View?
         ) {
-
+            val removed = viewModel.contents.removeAt(fromPosition)
+            viewModel.contents.add(toPosition, removed)
+            binding.rvContent.requestModelBuild()
         }
     }
 
-    private val controller = object : EpoxyController(){
-        override fun buildModels() {
-            viewModel.liveContents.value?.forEachIndexed { index, content ->
-                when(content.type){
-                    ContentType.TEXT -> {
-                        itemTextbox {
-                            id(content.id)
-                            onCancel{ _ ->
-                                onCancelContent(content)
+    private val controller: EpoxyController = object : EpoxyController() {
+            override fun buildModels() {
+                viewModel.contents.forEachIndexed { index, content ->
+                    when (content.type) {
+                        ContentType.TEXT -> {
+                            itemTextbox {
+                                id(content.id)
+                                description(content.text)
+                                onCancel { v ->
+                                    onCancelContent(content, v)
+                                }
+                                onClick { v ->
+                                    onFillText(content)
+                                }
                             }
                         }
-                    }
-                    ContentType.CHECKBOX -> {
-                        itemCheckbox {
-                            id(content.id)
-                            isChecked(content.isChecked)
-                            description(content.text)
-                            onCancel{ _ ->
-                                onCancelContent(content)
+
+                        ContentType.CHECKBOX -> {
+                            itemCheckbox {
+                                id(content.id)
+                                isChecked(content.isChecked)
+                                description(content.text)
+                                onCancel { v ->
+                                    onCancelContent(content, v)
+                                }
+                                onCheckedChange { _, isChecked ->
+                                    onCheckedChange(content, isChecked)
+                                }
+                                onClick { _ ->
+                                    onFillText(content)
+                                }
                             }
                         }
-                    }
-                    ContentType.IMAGE -> {
-                        itemListPhotoSelected {
-                            id(content.id)
-                            list(content.images)
-                            onClickPhoto { path ->
-                                if (path == Constants.DEFAULT) selectPhoto(content)
-                                else handleClickPhoto(path)
-                            }
-                            onCancel{ _ ->
-                                onCancelContent(content)
+
+                        ContentType.IMAGE -> {
+                            itemListPhotoSelected {
+                                id(content.id)
+                                list(viewModel.contents[index].images)
+                                onClickPhoto { path ->
+                                    if (path == Constants.DEFAULT) selectPhoto(content)
+                                    else handleClickPhoto(path)
+                                }
+                                onRemovePhoto{ path ->
+                                    removePhoto(content, path)
+                                }
+                                onCancel { v ->
+                                    onCancelContent(content, v)
+                                }
                             }
                         }
+
+                        else -> {}
                     }
-                    else -> {}
                 }
             }
         }
+
+    private fun onCheckedChange(content: DiaryModel.Content, isChecked: Boolean){
+
+    }
+
+    private fun onFillText(content: DiaryModel.Content) {
+
+    }
+
+    private fun removePhoto(content: DiaryModel.Content, path: String) {
+
     }
 
     private fun selectPhoto(content: DiaryModel.Content) {
@@ -128,7 +158,7 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R.layout.fra
         launchPhoto.launch("image/*")
     }
 
-    private fun onCancelContent(content: DiaryModel.Content) {
+    private fun onCancelContent(content: DiaryModel.Content, v: View) {
         if (viewModel.contentCurrent.value == content)
             viewModel.contentCurrent.value = null
         viewModel.removeContent(content)
@@ -200,18 +230,26 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R.layout.fra
     override fun addTextbox() {
         viewModel.addEmptyContent(ContentType.TEXT)
         addContentPopup?.dismiss()
+        updateNewYPos()
     }
 
     override fun addImage() {
         viewModel.addEmptyContent(ContentType.IMAGE)
         addContentPopup?.dismiss()
+        updateNewYPos()
     }
 
     override fun addCheckbox() {
         viewModel.addEmptyContent(ContentType.CHECKBOX)
         addContentPopup?.dismiss()
+        updateNewYPos()
     }
 
+    private fun updateNewYPos(){
+        makeDelay(30) {
+            viewModel.oldYPosBtnAdd = binding.btnAddContent.y
+        }
+    }
 
     override fun screenName(): String = ""
 

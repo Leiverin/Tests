@@ -16,6 +16,14 @@
             name="onCancel"
             type="android.view.View.OnClickListener" />
 
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onCheckedChange"
+            type="android.widget.CompoundButton.OnCheckedChangeListener" />
+
     </data>
 
     <FrameLayout
@@ -41,6 +49,7 @@
                 android:layout_marginStart="@dimen/_18sdp"
                 android:theme="@style/Theme.AppCompat"
                 android:checked="@{isChecked}"
+                android:onCheckedChanged="@{onCheckedChange}"
                 />
 
             <androidx.cardview.widget.CardView
@@ -61,8 +70,12 @@
                     android:textColorHint="@color/color_6B6B6B"
                     android:hint="@string/your_text_here"
                     android:text="@{description}"
+                    android:enabled="false"
+                    android:onClick="@{onClick}"
                     style="@style/text_style_12_regular"
                     android:textColor="@color/color_171717"
+                    android:textCursorDrawable="@drawable/cursor_edit_text"
+                    android:textColorHighlight="@color/color_171717_40"
                     />
 
             </androidx.cardview.widget.CardView>

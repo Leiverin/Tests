@@ -67,4 +67,6 @@
     <string name="checkbox">Checkbox</string>
     <string name="your_text_here">Your text here …</string>
     <string name="upload_image">Upload image</string>
+    <string name="not_found_photos">Not found photos</string>
+    <string name="done">Done</string>
 </resources>

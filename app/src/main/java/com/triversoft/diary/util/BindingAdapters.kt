@@ -9,9 +9,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.bumptech.glide.Glide
 import com.triversoft.diary.itemPhotoSelected
+import com.triversoft.diary.ui.create_diary.adapters.ImageUploadedAdapter
 import java.io.File
 import java.nio.ByteBuffer
 
@@ -127,22 +131,34 @@ fun View.onPreventDoubleClick(action: () -> Any?){
 }
 
 @BindingAdapter(
-    value = ["fillData", "onClickPath"],
+    value = ["fillData", "onClickPath", "onRemovePhoto"],
     requireAll = true
 )
-fun EpoxyRecyclerView.fillData(list: List<String>, onClickPath: (String) -> Unit){
-    withModels {
-        list.forEachIndexed { index, s ->
-            itemPhotoSelected {
-                id(index)
-                path(s)
-                isDefault(s == Constants.DEFAULT)
-                onClick { _ ->
-                    onClickPath.invoke(s)
+fun EpoxyRecyclerView.fillData(list: List<String>, onClickPath: (String) -> Unit, onRemovePhoto: (String) -> Unit){
+    val controller = object : EpoxyController(){
+        override fun buildModels() {
+            list.forEachIndexed { _, s ->
+                itemPhotoSelected {
+                    id(s)
+                    path(s)
+                    isDefault(s == Constants.DEFAULT)
+                    onClick { _ ->
+                        onClickPath.invoke(s)
+                    }
+                    onDelete{ _ ->
+                        onRemovePhoto.invoke(s)
+                    }
                 }
             }
         }
     }
+    setController(controller)
+    controller.requestModelBuild()
+//    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//    adapter = ImageUploadedAdapter().apply {
+//        submitData(list.toMutableList())
+//        onClickPhoto = onClickPath
+//    }
 }
 
 @BindingAdapter("loadDrawableWithAnim")
