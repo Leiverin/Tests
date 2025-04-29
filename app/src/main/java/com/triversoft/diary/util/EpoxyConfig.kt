@@ -8,8 +8,13 @@ import com.triversoft.diary.R
         R.layout.item_language,
         R.layout.item_onboarding,
         R.layout.item_settings,
-        R.layout.item_theme,
-        R.layout.item_tb_home,
+        R.layout.item_mood,
+        R.layout.item_weather,
+        R.layout.item_checkbox,
+        R.layout.item_textbox,
+        R.layout.item_list_photo_selected,
+        R.layout.item_photo_selected,
+        R.layout.item_button_add_content,
     ]
 )
 interface EpoxyConfig

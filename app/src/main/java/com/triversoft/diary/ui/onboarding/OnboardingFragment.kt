@@ -8,35 +8,24 @@ import com.triversoft.diary.itemOnboarding
 import com.triversoft.diary.ui.base.BaseFragment
 import com.triversoft.diary.databinding.FragmentOnboardingBinding
 import com.triversoft.diary.extension.setBackPressListener
-import com.triversoft.diary.extension.setPreventDoubleClick
 import com.triversoft.diary.util.CommonData
 import kotlin.system.exitProcess
 
 class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>(R.layout.fragment_onboarding) {
 
-    private val onboardings = mutableListOf<Triple<Int, Int,Int>>()
+    private val onboardings = mutableListOf<Pair<Int, Int>>()
     override fun initView(view: View) {
 
         setBackPressListener {
             exitProcess(0)
         }
-        binding .btnSkip.setPreventDoubleClick {
-            safeNav(R.id.onboardingFragment,R.id.action_onboardingFragment_to_homeFragment)
-        }
-        binding .btnNext.setPreventDoubleClick {
-                if (binding.pagerOnboarding.currentItem == controller.adapter.itemCount - 1){
-              safeNav(R.id.onboardingFragment,R.id.action_onboardingFragment_to_homeFragment)
-                }else{
-                    binding.pagerOnboarding.currentItem += 1
-                }
-            }
+
         context?.let { context ->
             onboardings.clear()
             onboardings.addAll(CommonData.onboardings(context))
         }
          binding.pagerOnboarding.adapter = controller.adapter
         binding.pagerOnboarding.registerOnPageChangeCallback(onPageChangeCallback)
-        binding.dotsIndicator.attachTo(binding.pagerOnboarding)
         controller.requestModelBuild()
     }
 
@@ -59,8 +48,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>(R.layout.frag
                 itemOnboarding {
                     id(index)
                     resId(pair.first)
-                    title(getString(pair.second))
-                    content(getString(pair.third))
+                    title(pair.second)
                     onClick { _ ->
                         if (binding.pagerOnboarding.currentItem == 2){
                             navToHome()

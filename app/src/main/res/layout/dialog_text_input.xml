@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_50"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_white_12rds_rounded_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/btnClose"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_close_dialog" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/btnDone"
+                    style="@style/text_style_14_bold"
+                    android:layout_alignTop="@+id/btnClose"
+                    android:layout_alignBottom="@+id/btnClose"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/done"
+                    android:gravity="center"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:textColor="@color/color_171717" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/edContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:background="@color/white"
+                style="@style/text_style_12_regular"
+                android:textColor="@color/color_171717"
+                android:hint="@string/your_text_here"
+                android:textColorHint="@color/color_6B6B6B"
+                android:textCursorDrawable="@drawable/cursor_edit_text"
+                android:textColorHighlight="@color/color_171717_40"
+                android:paddingVertical="@dimen/_4sdp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/btnCloseTools"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/ic_close_tool"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/viewTools"
+            app:layout_constraintTop_toTopOf="@+id/viewTools"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:elevation="@dimen/_13sdp"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewTools"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="360:196"
+            app:cardElevation="@dimen/_12sdp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/btnFont"
+                    android:layout_width="@dimen/_108sdp"
+                    android:layout_height="@dimen/_34sdp"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_stroke_6b6b6b_12rds"
+                    >
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|start"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_171717"
+                        android:text="Nunito"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/_6sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:src="@drawable/ic_arrow_up_down"
+                        android:scaleType="fitXY"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        />
+
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:id="@+id/btnTextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@+id/btnFont"
+                    app:layout_constraintBottom_toBottomOf="@id/btnFont"
+                    app:layout_constraintTop_toTopOf="@id/btnFont"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:background="@drawable/bg_circle_transparent_4rds"
+
+                    >
+                    
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_color_letter"
+                        android:scaleType="fitXY"
+                        />
+                    
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvColorCharacter"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_6sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:cardBackgroundColor="@color/color_171717"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        />
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnTextHighLightColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@+id/btnTextColor"
+                    app:layout_constraintBottom_toBottomOf="@id/btnTextColor"
+                    app:layout_constraintTop_toTopOf="@id/btnTextColor"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:background="@drawable/bg_circle_transparent_4rds"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_color_letter_highlight"
+                        android:scaleType="fitXY"
+                        />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvHighlightColor"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_6sdp"
+                        app:cardElevation="@dimen/_2sdp"
+                        app:cardBackgroundColor="@color/color_171717"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

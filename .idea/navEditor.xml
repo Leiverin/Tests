@@ -8,13 +8,13 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="chooseThemeFragment">
+                  <entry key="createDiaryFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="949" />
-                            <option name="y" value="-64" />
+                            <option name="x" value="1289" />
+                            <option name="y" value="462" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -46,8 +46,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="490" />
-                            <option name="y" value="-79" />
+                            <option name="x" value="500" />
+                            <option name="y" value="33" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -121,11 +121,6 @@
                               </value>
                             </entry>
                             <entry key="action_splashFragment_to_languageFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_splashFragment_to_onboardingFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

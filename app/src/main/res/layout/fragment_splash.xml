@@ -125,22 +125,13 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20ssp"
-                    android:fontFamily="@font/nunito_extra_bold"
+                    style="@style/text_style_18_bold"
                     android:text="@string/jellyfish"
-                    android:includeFontPadding="false"
                     android:textColor="#12457F"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/playwrite_regular"
+                    style="@style/text_style_18_regular"
                     android:text="@string/diary"
-                    android:textSize="@dimen/_20ssp"
-                    android:includeFontPadding="false"
-                    android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:textColor="#12457F"
                     />

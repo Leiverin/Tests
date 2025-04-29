@@ -3,7 +3,6 @@ package com.triversoft.diary.util
 import android.content.Context
 import com.triversoft.diary.R
 import com.triversoft.diary.data.models.Language
-import com.triversoft.diary.data.models.ThemeObj
 
 object CommonData {
 
@@ -25,96 +24,43 @@ object CommonData {
     )
 
     fun onboardings(context: Context) = arrayListOf(
-        Triple(
-            R.drawable.iv_ob_1,
-            R.string.title_ob_1,
-            R.string.content_ob_1
-        ),
-        Triple(
-            R.drawable.iv_ob_2,
-          R.string.title_ob_2,
-            R.string.content_ob_2
-        ),
-        Triple(
-            R.drawable.iv_ob_3,
-           R.string.title_ob_3,
-            R.string.content_ob_3
-        ),
-        Triple(
-            R.drawable.iv_ob_4,
-           R.string.title_ob_4,
-            R.string.content_ob_4
-        ),
+        Pair(R.drawable.on_broading_1, R.string.string_content_onboarding_first),
+        Pair(R.drawable.on_broading_2, R.string.string_content_onboarding_second),
+        Pair(R.drawable.on_broading_3, R.string.string_content_onboarding_third),
     )
 
-    fun themes( ) = arrayListOf(
-        ThemeObj(
-            "light",R.drawable.iv_theme_1,"Light","#FFFFFF",false,false
-        ),
-        ThemeObj(
-            "dark",R.drawable.iv_theme_2,"Dark","#6B6B6B",false,false
-        ),
-        ThemeObj(
-            "heart_bloom",R.drawable.iv_theme_3,"Heart Bloom","#E899A4",false,false
-        ),
-        ThemeObj(
-            "cloud_field",R.drawable.iv_theme_4,"Cloud Field","#59B5C9",true,false
-        ),
-        ThemeObj(
-            "starry_dream",R.drawable.iv_theme_5,"Starry Dream","#A18CE0",true,false
-        ),
-        ThemeObj(
-            "jelly_sea",R.drawable.iv_theme_6,"Jelly Sea","#6699CC",true,false
-        ),
-        ThemeObj(
-            "sunny_joy",R.drawable.iv_theme_7,"Sunny Joy","#ECB64D",true,false
-        ),
-        ThemeObj(
-            "cosmic_night",R.drawable.iv_theme_8,"Cosmic Night","#6B6B6B",true,false
-        ),
-        ThemeObj(
-            "evening_stop",R.drawable.iv_theme_9,"Evening Stop","#6B6B6B",true,false
-        )
-    )
     fun suggestion(context: Context) = arrayListOf(
-        Triple(
-            R.drawable.sg_1,
-            R.string.title_suggestion_1,
-            context.getString(R.string.content_suggestion_1)
-        ),
-        Triple(
-            R.drawable.sg_2,
-          R.string.title_suggestion_2,
-                  context.getString(R.string.content_suggestion_2)
-        ),
-        Triple(
-            R.drawable.sg_3,
-            R.string.title_suggestion_3,
-            context.getString(R.string.content_suggestion_3)
-        ),
+        Triple(R.drawable.sg_1, R.string.title_suggestion_1, context.getString(R.string.content_suggestion_1)),
+        Triple(R.drawable.sg_2, R.string.title_suggestion_2, context.getString(R.string.content_suggestion_2)),
+        Triple(R.drawable.sg_3, R.string.title_suggestion_3, context.getString(R.string.content_suggestion_3)),
     )
 
     fun settings(context: Context?) = arrayListOf(
-        Pair(
-            R.drawable.ic_policy,
-            context?.resources?.getString(R.string.privacy_policy) ?: "Privacy Policy"
-        ),
-        Pair(
-            R.drawable.ic_language,
-            context?.resources?.getString(R.string.language) ?: "Language"
-        ),
-        Pair(
-            R.drawable.ic_share,
-            context?.resources?.getString(
+        Pair(R.drawable.ic_policy, context?.resources?.getString(R.string.privacy_policy) ?: "Privacy Policy"),
+        Pair(R.drawable.ic_language, context?.resources?.getString(R.string.language) ?: "Language"),
+        Pair(R.drawable.ic_share, context?.resources?.getString(
                 R.string.share,
                 context.resources.getString(R.string.app_name)
-            ) ?: "Share GOLD DETECTOR"
-        ),
-        Pair(
-            R.drawable.ic_feedback,
-            context?.resources?.getString(R.string.feedback) ?: "Feedback"
-        ),
+            ) ?: "Share GOLD DETECTOR"),
+        Pair(R.drawable.ic_feedback, context?.resources?.getString(R.string.feedback) ?: "Feedback"),
     )
 
+    fun moods() = arrayListOf(
+        Pair(0, R.drawable.ic_happy_mood),
+        Pair(1, R.drawable.ic_normal_mood),
+        Pair(2, R.drawable.ic_very_happy_mood),
+        Pair(3, R.drawable.ic_angry_mood),
+        Pair(4, R.drawable.ic_sorrow_mood),
+        Pair(5, R.drawable.ic_cry_mood),
+    )
+
+    fun weatherData(context: Context? = null) = arrayListOf(
+        Triple(0, context?.getString(R.string.sunny) ?: "Sunny", R.drawable.ic_sunny),
+        Triple(1, context?.getString(R.string.rainy) ?: "Rainy", R.drawable.ic_ranny),
+        Triple(2, context?.getString(R.string.cloudy) ?: "Cloudy", R.drawable.ic_cloudy),
+        Triple(3, context?.getString(R.string.foggy) ?: "Foggy", R.drawable.ic_foggy),
+        Triple(4, context?.getString(R.string.cold) ?: "Cold", R.drawable.ic_cold),
+        Triple(5, context?.getString(R.string.windy) ?: "Windy", R.drawable.ic_windy),
+    )
 
 }

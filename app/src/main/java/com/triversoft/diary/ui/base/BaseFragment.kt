@@ -23,8 +23,6 @@ abstract class BaseFragment<V : ViewDataBinding>(val layout_id:Int) : Fragment()
 
     lateinit var binding: V
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MultiLanguages.updateAppLanguage(context)
@@ -58,6 +56,11 @@ abstract class BaseFragment<V : ViewDataBinding>(val layout_id:Int) : Fragment()
             }
         }
     }
+
+    fun popUpBackStack(){
+        findNavController().popBackStack()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
@@ -69,9 +72,6 @@ abstract class BaseFragment<V : ViewDataBinding>(val layout_id:Int) : Fragment()
         super.onResume()
         hideSystemNavigation()
     }
-
-
-
 
 
     private fun hideSystemNavigation(){

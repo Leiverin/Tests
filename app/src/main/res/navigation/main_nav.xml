@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-     app:startDestination="@id/chooseThemeFragment">
+    >
 
     <fragment
         android:id="@+id/splashFragment"
@@ -21,9 +21,6 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_splashFragment_to_onboardingFragment"
-            app:destination="@id/onboardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
@@ -63,9 +60,11 @@
             app:destination="@id/settingsFragment" />
     </fragment>
      <fragment
-         android:id="@+id/chooseThemeFragment"
-         android:name="com.triversoft.diary.ui.theme.ChooseThemeFragment"
-         android:label="ChooseThemeFragment" />
+         android:id="@+id/createDiaryFragment"
+         android:name="com.triversoft.diary.ui.create_diary.CreateDiaryFragment"
+         android:label="CreateDiaryFragment"
+         tools:layout="@layout/fragment_create_dairy"
+         />
 
 
  </navigation>

@@ -11,17 +11,59 @@ import com.triversoft.diary.ui.base.BaseFragment
 import kotlin.system.exitProcess
 
 class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    var theme = "light"
-    var isWhiteTheme = true
-    var a =1
+
+
+    private fun initData() {
+        binding.apply {
+            view?.post {
+            YoYo.with(Techniques.Tada)
+                .duration(500)
+                .repeat(3)
+                .playOn(ivTutorial)
+
+            YoYo.with(Techniques.SlideInLeft)
+                .duration(500)
+                .repeat(0)
+                .playOn(lnCurrentSize)
+
+            YoYo.with(Techniques.SlideInRight)
+                .duration(500)
+                .repeat(0)
+                .playOn(lnCustom)
+
+            YoYo.with(Techniques.SlideInUp)
+                .duration(500)
+                .repeat(0)
+                .playOn(rlSize13)
+
+            YoYo.with(Techniques.SlideInUp)
+                .duration(700)
+                .repeat(0)
+                .playOn(rlSize16)
+
+            YoYo.with(Techniques.SlideInUp)
+                .duration(1000)
+                .repeat(0)
+                .playOn(rlSize20)
+            }
+
+            lnCurrentSize.setPreventDoubleClick {
+
+            }
+            rlCurrentSize.setPreventDoubleClick {
+
+            }
+            btnTutorial.setPreventDoubleClick {
+            }
+        }
+    }
 
 
     override fun initView(view: View) {
         setBackPressListener {
-        exitProcess(0)
-    }
+            exitProcess(0)
+        }
         initData()
-        initRvHome()
     }
 
     override fun screenName(): String = "fragment_home"

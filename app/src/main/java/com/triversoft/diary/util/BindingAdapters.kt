@@ -9,7 +9,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.bumptech.glide.Glide
+import com.triversoft.diary.itemPhotoSelected
+import com.triversoft.diary.ui.create_diary.adapters.ImageUploadedAdapter
 import java.io.File
 import java.nio.ByteBuffer
 
@@ -122,4 +128,56 @@ fun View.onPreventDoubleClick(action: () -> Any?){
             this.postDelayed({this.isEnabled = true}, 500)
         }
     }
+}
+
+@BindingAdapter(
+    value = ["fillData", "onClickPath", "onRemovePhoto"],
+    requireAll = true
+)
+fun EpoxyRecyclerView.fillData(list: List<String>, onClickPath: (String) -> Unit, onRemovePhoto: (String) -> Unit){
+    val controller = object : EpoxyController(){
+        override fun buildModels() {
+            list.forEachIndexed { _, s ->
+                itemPhotoSelected {
+                    id(s)
+                    path(s)
+                    isDefault(s == Constants.DEFAULT)
+                    onClick { _ ->
+                        onClickPath.invoke(s)
+                    }
+                    onDelete{ _ ->
+                        onRemovePhoto.invoke(s)
+                    }
+                }
+            }
+        }
+    }
+    setController(controller)
+    controller.requestModelBuild()
+//    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//    adapter = ImageUploadedAdapter().apply {
+//        submitData(list.toMutableList())
+//        onClickPhoto = onClickPath
+//    }
+}
+
+@BindingAdapter("loadDrawableWithAnim")
+fun ImageView.loadDrawableWithAnim(resId: Int){
+    animate().cancel()
+    this.animate()
+        .alpha(0f)
+        .scaleY(0f)
+        .scaleX(0f)
+        .setDuration(150)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                Glide.with(context).load(resId).into(this@loadDrawableWithAnim)
+                this@loadDrawableWithAnim.animate()
+                    .alpha(1f)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(150)
+            }
+        })
 }
