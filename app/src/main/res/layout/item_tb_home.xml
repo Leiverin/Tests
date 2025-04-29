@@ -7,6 +7,9 @@
         <variable
             name="isPro"
             type="Boolean" />
+        <variable
+            name="isWhite"
+            type="Boolean" />
 
         <variable
             name="onClick"
@@ -22,7 +25,7 @@
                 android:id="@+id/tvTitle"
                 style="@style/text_style_20_bold"
                 android:fontFamily="@font/playwrite_regular"
-                android:textColor="@color/black"
+                android:textColor="@{isWhite?@color/black:@color/white}"
                 android:text="@string/title_home"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_16sdp"

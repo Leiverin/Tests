@@ -3,23 +3,19 @@ package com.triversoft.diary.ui.theme
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.airbnb.epoxy.EpoxyController
 import com.triversoft.diary.R
 import com.triversoft.diary.data.models.ThemeObj
 import com.triversoft.diary.databinding.FragmentChooseThemeBinding
-import com.triversoft.diary.itemOnboarding
-import com.triversoft.diary.ui.base.BaseFragment
-import com.triversoft.diary.databinding.FragmentOnboardingBinding
 import com.triversoft.diary.extension.beVisible
 import com.triversoft.diary.extension.setBackPressListener
 import com.triversoft.diary.extension.setPreventDoubleClick
 import com.triversoft.diary.itemTheme
+import com.triversoft.diary.ui.base.BaseFragment
 import com.triversoft.diary.util.CommonData
 import com.triversoft.diary.util.invisible
-import com.triversoft.diary.util.visible
 import kotlin.system.exitProcess
 
 class ChooseThemeFragment :
@@ -29,19 +25,20 @@ class ChooseThemeFragment :
             super.onPageSelected(position)
             val theme = themes[position]
             binding.apply {
-              viewColorTheme.backgroundTintList = ColorStateList.valueOf(Color.parseColor(theme.colorTheme))
-           if (theme.isPro && !theme.isBuy) {
-               btnApply.invisible(true)
-               tvDesThemePro.beVisible()
-               btnWatchAds.beVisible()
-               btnGoPro.beVisible()
-           }else{
-               btnApply.beVisible()
-               tvDesThemePro.invisible(true)
-               btnWatchAds.invisible(true)
-               btnGoPro.invisible(true)
-           }
-           }
+                viewColorTheme.backgroundTintList =
+                    ColorStateList.valueOf(Color.parseColor(theme.colorTheme))
+                if (theme.isPro && !theme.isBuy) {
+                    btnApply.invisible(true)
+                    tvDesThemePro.beVisible()
+                    btnWatchAds.beVisible()
+                    btnGoPro.beVisible()
+                } else {
+                    btnApply.beVisible()
+                    tvDesThemePro.invisible(true)
+                    btnWatchAds.invisible(true)
+                    btnGoPro.invisible(true)
+                }
+            }
         }
     }
     private val themes = mutableListOf<ThemeObj>()
@@ -54,10 +51,8 @@ class ChooseThemeFragment :
             safeNav(R.id.onboardingFragment, R.id.action_onboardingFragment_to_homeFragment)
         }
 
-        context?.let { context ->
-            themes.clear()
-            themes.addAll(CommonData.themes(context))
-        }
+        themes.clear()
+        themes.addAll(CommonData.themes())
         binding.pagerTheme.adapter = controller.adapter
         binding.pagerTheme.registerOnPageChangeCallback(onPageChangeCallback)
 

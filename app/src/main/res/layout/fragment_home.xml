@@ -10,16 +10,131 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      >
+     <ImageView
+         android:id="@+id/bgHome"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:scaleType="centerCrop"
+         />
+
+     <ImageView
+         android:id="@+id/bgEffectHome"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         app:layout_constraintBottom_toBottomOf="parent"
+         />
+
      <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rcvHome"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          />
 
+     <ImageView
+         android:id="@+id/ivEmpty"
+         android:layout_width="@dimen/_134sdp"
+         android:layout_height="@dimen/_134sdp"
+         tools:src="@drawable/jelly_blue_smile"
+         android:visibility="invisible"
+         drawable="@{@drawable/jelly_blue_smile}"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintBottom_toTopOf="@id/bgBottomHome"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         />
+
+
+
+     <TextView
+         android:id="@+id/btnGo"
+         style="@style/text_style_16_bold"
+         android:textColor="@color/white"
+         android:backgroundTint="@color/bg_dark"
+         android:background="@drawable/bg_radius_12"
+         android:text="@string/go"
+         android:layout_gravity="end"
+         android:visibility="invisible"
+         android:minWidth="@dimen/_100sdp"
+         android:gravity="center"
+         android:layout_alignParentEnd="true"
+         android:layout_marginTop="@dimen/_24sdp"
+         android:paddingVertical="@dimen/_12sdp"
+         android:paddingHorizontal="@dimen/_16sdp"
+         android:layout_centerVertical="true"
+         app:layout_constraintTop_toBottomOf="@id/ivEmpty"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         />
+     <ImageView
+         android:id="@+id/ivJellyChatTop"
+         android:layout_width="@dimen/_150sdp"
+         android:layout_height="wrap_content"
+         android:adjustViewBounds="true"
+         tools:src="@drawable/bg_chat_top"
+         android:visibility="invisible"
+         drawable="@{@drawable/bg_chat_top}"
+         app:tint="#f2f2f2"
+         app:layout_constraintEnd_toEndOf="@id/ivEmpty"
+         app:layout_constraintBottom_toBottomOf="@+id/ivEmpty"
+         android:layout_marginBottom="@dimen/_80sdp"
+         android:layout_marginEnd="@dimen/_80sdp"
+         />
+
+     <com.hanks.htextview.typer.TyperTextView
+         android:id="@+id/tvChatTop"
+         style="@style/text_style_12_regular"
+         android:layout_width="@dimen/_120sdp"
+         android:paddingBottom="@dimen/_31sdp"
+         android:visibility="invisible"
+         android:paddingHorizontal="@dimen/_16sdp"
+         android:gravity="center"
+         android:text="@string/home_empty_chat_1"
+         android:textColor="#12457F"
+         app:charIncrease="3"
+         app:typerSpeed="80"
+         android:layout_marginTop="@dimen/_16sdp"
+         app:layout_constraintBottom_toBottomOf="@id/ivJellyChatTop"
+         app:layout_constraintTop_toTopOf="@id/ivJellyChatTop"
+         app:layout_constraintStart_toStartOf="@id/ivJellyChatTop"
+         app:layout_constraintEnd_toEndOf="@id/ivJellyChatTop"
+         />
 
 
      <ImageView
-         android:id="@+id/bgHome"
+         android:id="@+id/ivJellyChatBot"
+         android:layout_width="@dimen/_100sdp"
+         android:layout_height="wrap_content"
+         android:adjustViewBounds="true"
+         app:tint="#f2f2f2"
+         app:layout_constraintBottom_toBottomOf="@+id/ivEmpty"
+         tools:src="@drawable/bg_chat_bot"
+         android:visibility="invisible"
+         drawable="@{@drawable/bg_chat_bot}"
+         app:layout_constraintStart_toStartOf="@id/ivEmpty"
+         android:layout_marginStart="@dimen/_100sdp"
+         app:layout_constraintTop_toTopOf="@id/ivEmpty"
+         />
+
+     <com.hanks.htextview.typer.TyperTextView
+         android:id="@+id/tvChatBot"
+         style="@style/text_style_12_regular"
+         android:layout_width="@dimen/_80sdp"
+         android:paddingVertical="@dimen/_14sdp"
+         android:paddingHorizontal="@dimen/_10sdp"
+         android:visibility="invisible"
+         android:gravity="center"
+         android:text="@string/home_empty_chat_2"
+         android:textColor="#12457F"
+         app:charIncrease="3"
+         app:typerSpeed="80"
+         android:layout_marginTop="@dimen/_16sdp"
+         app:layout_constraintTop_toTopOf="@id/ivJellyChatBot"
+         app:layout_constraintStart_toStartOf="@id/ivJellyChatBot"
+         app:layout_constraintEnd_toEndOf="@id/ivJellyChatBot"
+         />
+
+     <ImageView
+         android:id="@+id/bgBottomHome"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:adjustViewBounds="true"
@@ -32,12 +147,12 @@
          android:id="@+id/btnWrite"
          android:layout_width= "@dimen/_60sdp"
          android:layout_height="@dimen/_60sdp"
-         android:src="@drawable/ic_h_write_1"
-         drawable="@{@drawable/ic_h_write_1}"
+         android:src="@drawable/ic_h_write_heart_bloom"
+         drawable="@{@drawable/ic_h_write_light}"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toTopOf="@id/bgHome"
-         app:layout_constraintBottom_toTopOf="@id/bgHome"
+         app:layout_constraintTop_toTopOf="@id/bgBottomHome"
+         app:layout_constraintBottom_toTopOf="@id/bgBottomHome"
          />
 
 
@@ -45,13 +160,13 @@
          android:id="@+id/btnTemplate"
          android:layout_width="@dimen/_56sdp"
          android:layout_height="@dimen/_56sdp"
-         android:src="@drawable/ic_h_template_1"
-         drawable="@{@drawable/ic_h_template_1}"
+         android:src="@drawable/ic_h_template_light"
+         drawable="@{@drawable/ic_h_template_light}"
          android:padding="@dimen/_12sdp"
          android:layout_marginStart="@dimen/_16sdp"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="@id/bgHome"
-         app:layout_constraintBottom_toBottomOf="@id/bgHome"
+         app:layout_constraintTop_toTopOf="@id/bgBottomHome"
+         app:layout_constraintBottom_toBottomOf="@id/bgBottomHome"
          />
 
 
@@ -59,26 +174,26 @@
          android:id="@+id/btnFavorite"
          android:layout_width="@dimen/_56sdp"
          android:layout_height="@dimen/_56sdp"
-         android:src="@drawable/ic_h_favorite_1"
-         drawable="@{@drawable/ic_h_favorite_1}"
+         android:src="@drawable/ic_h_favorite_light"
+         drawable="@{@drawable/ic_h_favorite_light}"
          android:padding="@dimen/_12sdp"
          android:layout_marginStart="@dimen/_16sdp"
          app:layout_constraintStart_toEndOf="@id/btnTemplate"
-         app:layout_constraintTop_toTopOf="@id/bgHome"
-         app:layout_constraintBottom_toBottomOf="@id/bgHome"
+         app:layout_constraintTop_toTopOf="@id/bgBottomHome"
+         app:layout_constraintBottom_toBottomOf="@id/bgBottomHome"
          />
 
      <ImageView
          android:id="@+id/btnSetting"
          android:layout_width="@dimen/_56sdp"
          android:layout_height="@dimen/_56sdp"
-         android:src="@drawable/ic_h_setting_1"
-         drawable="@{@drawable/ic_h_setting_1}"
+         android:src="@drawable/ic_h_setting_light"
+         drawable="@{@drawable/ic_h_setting_light}"
          android:padding="@dimen/_12sdp"
          android:layout_marginEnd="@dimen/_16sdp"
          app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toTopOf="@id/bgHome"
-         app:layout_constraintBottom_toBottomOf="@id/bgHome"
+         app:layout_constraintTop_toTopOf="@id/bgBottomHome"
+         app:layout_constraintBottom_toBottomOf="@id/bgBottomHome"
          />
 
 
@@ -86,13 +201,13 @@
          android:id="@+id/btnDashBoard"
          android:layout_width="@dimen/_56sdp"
          android:layout_height="@dimen/_56sdp"
-         android:src="@drawable/ic_h_dash_1"
-         drawable="@{@drawable/ic_h_dash_1}"
+         android:src="@drawable/ic_h_dash_light"
+         drawable="@{@drawable/ic_h_dash_light}"
          android:padding="@dimen/_12sdp"
          android:layout_marginEnd="@dimen/_16sdp"
          app:layout_constraintEnd_toStartOf="@id/btnSetting"
-         app:layout_constraintTop_toTopOf="@id/bgHome"
-         app:layout_constraintBottom_toBottomOf="@id/bgHome"
+         app:layout_constraintTop_toTopOf="@id/bgBottomHome"
+         app:layout_constraintBottom_toBottomOf="@id/bgBottomHome"
          />
 
  </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,33 +47,33 @@ object CommonData {
         ),
     )
 
-    fun themes(context: Context) = arrayListOf(
+    fun themes( ) = arrayListOf(
         ThemeObj(
-            "1",R.drawable.iv_theme_1,"Light","#FFFFFF",false,false
+            "light",R.drawable.iv_theme_1,"Light","#FFFFFF",false,false
         ),
         ThemeObj(
-            "2",R.drawable.iv_theme_2,"Dark","#6B6B6B",false,false
+            "dark",R.drawable.iv_theme_2,"Dark","#6B6B6B",false,false
         ),
         ThemeObj(
-            "3",R.drawable.iv_theme_3,"Heart Bloom","#E899A4",false,false
+            "heart_bloom",R.drawable.iv_theme_3,"Heart Bloom","#E899A4",false,false
         ),
         ThemeObj(
-            "4",R.drawable.iv_theme_4,"Cloud Field","#59B5C9",true,false
+            "cloud_field",R.drawable.iv_theme_4,"Cloud Field","#59B5C9",true,false
         ),
         ThemeObj(
-            "5",R.drawable.iv_theme_5,"Starry Dream","#A18CE0",true,false
+            "starry_dream",R.drawable.iv_theme_5,"Starry Dream","#A18CE0",true,false
         ),
         ThemeObj(
-            "6",R.drawable.iv_theme_6,"Jelly Sea","#6699CC",true,false
+            "jelly_sea",R.drawable.iv_theme_6,"Jelly Sea","#6699CC",true,false
         ),
         ThemeObj(
-            "7",R.drawable.iv_theme_7,"Sunny Joy","#ECB64D",true,false
+            "sunny_joy",R.drawable.iv_theme_7,"Sunny Joy","#ECB64D",true,false
         ),
         ThemeObj(
-            "8",R.drawable.iv_theme_8,"Cosmic Night","#6B6B6B",true,false
+            "cosmic_night",R.drawable.iv_theme_8,"Cosmic Night","#6B6B6B",true,false
         ),
         ThemeObj(
-            "9",R.drawable.iv_theme_9,"Evening Stop","#6B6B6B",true,false
+            "evening_stop",R.drawable.iv_theme_9,"Evening Stop","#6B6B6B",true,false
         )
     )
     fun suggestion(context: Context) = arrayListOf(

@@ -66,4 +66,7 @@
     <string name="unlock_now">Unlock now</string>
     <string name="go_pro">Go Pro</string>
     <string name="title_home">How\'s today?</string>
+    <string name="home_empty_chat_1">Hi! I\'m excited to see your first diary entry</string>
+    <string name="home_empty_chat_2">" Just start writing!"</string>
+    <string name="go">Go</string>
 </resources>

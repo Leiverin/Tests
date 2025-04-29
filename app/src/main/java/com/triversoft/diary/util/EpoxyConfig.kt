@@ -9,6 +9,7 @@ import com.triversoft.diary.R
         R.layout.item_onboarding,
         R.layout.item_settings,
         R.layout.item_theme,
+        R.layout.item_tb_home,
     ]
 )
 interface EpoxyConfig

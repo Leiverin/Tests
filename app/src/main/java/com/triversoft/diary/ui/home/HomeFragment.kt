@@ -11,14 +11,9 @@ import com.triversoft.diary.ui.base.BaseFragment
 import kotlin.system.exitProcess
 
 class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-
-
-    private fun initData() {
-        binding.apply {
-            view?.post {
-        }
-        }
-    }
+    var theme = "light"
+    var isWhiteTheme = true
+    var a =1
 
 
     override fun initView(view: View) {
@@ -26,8 +21,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         exitProcess(0)
     }
         initData()
-
-
+        initRvHome()
     }
 
     override fun screenName(): String = "fragment_home"
