@@ -69,4 +69,7 @@
     <string name="upload_image">Upload image</string>
     <string name="not_found_photos">Not found photos</string>
     <string name="done">Done</string>
+    <string name="title_normal">Title</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="content">Content</string>
 </resources>

@@ -2,6 +2,7 @@ package com.triversoft.diary.extension
 
 import android.content.Context
 import android.net.Uri
+import android.view.View
 import java.io.File
 import java.io.FileOutputStream
 
@@ -21,3 +22,4 @@ fun Uri.toPath(context: Context): String? {
     }
     return file.absolutePath
 }
+

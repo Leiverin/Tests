@@ -3,6 +3,9 @@ package com.triversoft.diary.extension
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.Resources
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
@@ -83,4 +86,15 @@ fun View.makeAnimScale(time: Long = 1500L, scale: Float = 1.3f, isFinite: Boolea
         if (isFinite) repeatCount = ValueAnimator.INFINITE
     }
     animator.start()
+}
+
+fun View.dp(number: Number): Float {
+    val metric =
+        getDisplayMetric(context)
+
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, number.toFloat(), metric)
+}
+
+fun getDisplayMetric(context: Context?): DisplayMetrics {
+    return if (context != null) context.resources.displayMetrics else Resources.getSystem().displayMetrics
 }
