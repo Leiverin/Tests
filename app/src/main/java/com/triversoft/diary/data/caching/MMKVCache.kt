@@ -28,7 +28,4 @@ object MMKVCache {
             MMKV.defaultMMKV().encodeListParcelable(MMKVKey.LIST_FONT, value)
         }
 
-
-
-
 }

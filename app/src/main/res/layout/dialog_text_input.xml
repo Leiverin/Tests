@@ -295,7 +295,9 @@
                         android:singleLine="true"
                         android:layout_weight="1"
                         android:textColor="@color/color_171717"
-                        android:text="Nunito"
+                        android:text="@{viewModel.fontCurrent.text}"
+                        fontPath="@{viewModel.fontCurrent.pathRegular}"
+                        fontStyle="@{0}"
                         />
 
                     <ImageView
@@ -339,6 +341,7 @@
                         app:cardBackgroundColor="@color/color_171717"
                         android:layout_marginTop="@dimen/_2sdp"
                         app:cardCornerRadius="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         setBgColor="@{viewModel.textColorCurrent}"
                         />
                     
@@ -375,6 +378,7 @@
                         app:cardBackgroundColor="@color/color_171717"
                         android:layout_marginTop="@dimen/_2sdp"
                         app:cardCornerRadius="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         setBgColor="@{viewModel.textHighlightColorCurrent}"
                         />
 
@@ -553,7 +557,11 @@
                             style="@style/text_style_24_bold"
                             android:text="@string/title_normal"
                             android:layout_centerInParent="true"
+                            android:singleLine="true"
+                            android:ellipsize="end"
                             android:textColor="@color/color_171717"
+                            fontPath="@{viewModel.fontCurrent.pathBold}"
+                            fontStyle="@{2}"
                             />
 
                     </RelativeLayout>
@@ -567,10 +575,14 @@
                         >
 
                         <TextView
-                            style="@style/text_style_24_medium"
+                            style="@style/text_style_20_medium"
                             android:text="@string/subtitle"
                             android:layout_centerInParent="true"
+                            android:singleLine="true"
+                            android:ellipsize="end"
                             android:textColor="@color/color_171717"
+                            fontPath="@{viewModel.fontCurrent.pathMedium}"
+                            fontStyle="@{0}"
                             />
 
                     </RelativeLayout>
@@ -584,10 +596,14 @@
                         >
 
                         <TextView
-                            style="@style/text_style_24_regular"
+                            style="@style/text_style_14_regular"
                             android:text="@string/content"
                             android:layout_centerInParent="true"
                             android:textColor="@color/color_171717"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            fontPath="@{viewModel.fontCurrent.pathRegular}"
+                            fontStyle="@{0}"
                             />
 
                     </RelativeLayout>

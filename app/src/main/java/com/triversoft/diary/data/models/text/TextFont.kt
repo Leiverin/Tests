@@ -15,6 +15,10 @@ data class TextFont(
         return paths.firstOrNull { it.contains("regular") } ?: paths.lastOrNull() ?: ""
     }
 
+    fun getPathMedium(): String {
+        return paths.firstOrNull { it.contains("medium") } ?: paths.lastOrNull() ?: ""
+    }
+
     fun getPathBold(): String{
         return paths.firstOrNull { it.contains("bold") } ?: paths.firstOrNull() ?: ""
     }

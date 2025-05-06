@@ -3,11 +3,13 @@ package com.triversoft.diary.ui.dialog.text_input
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.triversoft.diary.R
 import com.triversoft.diary.data.caching.MMKVCache
+import com.triversoft.diary.data.mmkv.MMKVUtils
 import com.triversoft.diary.data.models.text.FeatureExpandType
 import com.triversoft.diary.data.models.text.FontStyle
 import com.triversoft.diary.data.models.text.TextAlign
@@ -44,8 +46,8 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
 
     private fun observerData() {
         binding.viewModel = viewModel
+        viewModel.fontCurrent.value = MMKVCache.fonts.firstOrNull { it.id == MMKVUtils.fontCurrent }
         viewModel.fontStyles.observe(viewLifecycleOwner){ fontStyles ->
-
         }
     }
 
@@ -61,9 +63,9 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
             binding.viewEdit.visibleAnimTranslate(false, 1L)
             binding.viewTools.visibleAnimTranslate(false, 1L)
             lifecycleScope.launch(Dispatchers.Main) {
+                delay(50)
+                binding.viewEdit.visibleAnimTranslate(true, 200L)
                 delay(100)
-                binding.viewEdit.visibleAnimTranslate(true, 300L)
-                delay(300)
                 binding.viewTools.visibleAnimTranslate(true, 300L){
                     binding.btnCloseTools.beVisible()
                 }
@@ -104,6 +106,7 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
 
     private fun onClickFont(textFont: TextFont) {
         viewModel.fontCurrent.value = textFont
+        MMKVUtils.fontCurrent = textFont.id
         binding.rvFont.requestModelBuild()
     }
 
@@ -128,7 +131,7 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
         }
 
         // Events in popup expand option
-        binding.btnPlusColor.setPreventDoubleClick {
+        binding.btnPlusColor.setOnClickListener {
             viewModel.featureExpandType.value = FeatureExpandType.ADD_COLOR
         }
         binding.btnBackPopupFeature.setPreventDoubleClick {
@@ -140,69 +143,75 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
         }
 
         // Events popup default
-        binding.btnFont.setPreventDoubleClick {
+        binding.btnFont.setOnClickListener {
             viewModel.toggleFontOpt()
         }
-        binding.btnTextColor.setPreventDoubleClick {
+        binding.btnTextColor.setOnClickListener {
             viewModel.toggleTextColorOpt()
             binding.rvColor.requestModelBuild()
         }
-        binding.btnTextHighLightColor.setPreventDoubleClick {
+        binding.btnTextHighLightColor.setOnClickListener {
             viewModel.toggleTextHighlightOpt()
             binding.rvColor.requestModelBuild()
         }
 
         // Events text align
-        binding.btnAlignStart.setPreventDoubleClick {
+        binding.btnAlignStart.setOnClickListener {
             viewModel.alignCurrent.value = TextAlign.START
         }
-        binding.btnAlignCenter.setPreventDoubleClick {
+        binding.btnAlignCenter.setOnClickListener {
             viewModel.alignCurrent.value = TextAlign.CENTER
         }
-        binding.btnAlignEnd.setPreventDoubleClick {
+        binding.btnAlignEnd.setOnClickListener {
             viewModel.alignCurrent.value = TextAlign.END
         }
 
         // Event font styles
-        binding.btnBold.setPreventDoubleClick {
+        binding.btnBold.setOnClickListener {
             viewModel.toggleStyle(FontStyle.BOLD)
         }
-        binding.btnItalic.setPreventDoubleClick {
+        binding.btnItalic.setOnClickListener {
             viewModel.toggleStyle(FontStyle.ITALIC)
         }
-        binding.btnUnderline.setPreventDoubleClick {
+        binding.btnUnderline.setOnClickListener {
             viewModel.toggleStyle(FontStyle.UNDERLINE)
         }
-        binding.btnStrikeThrough.setPreventDoubleClick {
+        binding.btnStrikeThrough.setOnClickListener {
             viewModel.toggleStyle(FontStyle.STRIKETHROUGH)
         }
 
         // Event text type
-        binding.btnTitle.setPreventDoubleClick {
+        binding.btnTitle.setOnClickListener {
             viewModel.textType.value = TextType.TITLE
         }
-        binding.btnSubTitle.setPreventDoubleClick {
+        binding.btnSubTitle.setOnClickListener {
             viewModel.textType.value = TextType.SUBTITLE
         }
-        binding.btnContent.setPreventDoubleClick {
+        binding.btnContent.setOnClickListener {
             viewModel.textType.value = TextType.CONTENT
         }
         binding.hueView.setOnHueChangedListener { hue, argbColor ->
             binding.hueOpacityView.selectedColor = argbColor
-            binding.cvColorCustom.setCardBackgroundColor(argbColor)
+            binding.cvColorCustom.setCardBackgroundColor(viewModel.calculateColor(argbColor, binding.hueOpacityView.alphaValue))
         }
         binding.hueOpacityView.setOnAlphaChangedListener {
-
+            binding.cvColorCustom.setCardBackgroundColor(viewModel.calculateColor(binding.hueOpacityView.selectedColor, binding.hueOpacityView.alphaValue))
+        }
+        binding.edContent.doOnTextChanged { text, start, before, count ->
+            
         }
     }
 
     private fun onDoneCustomColor() {
+        val colorSelected = viewModel.calculateColor(binding.hueOpacityView.selectedColor, binding.hueOpacityView.alphaValue)
         val colors = MMKVCache.colors.toMutableList()
-        colors.add(0, binding.hueOpacityView.selectedColor)
+        colors.add(0, colorSelected)
         MMKVCache.colors = colors as ArrayList<Int>
         viewModel.colors.value = MMKVCache.colors
-        viewModel.textColorCurrent.value = binding.hueOpacityView.selectedColor
+        if (viewModel.textColorMode.value == TextColorMode.TEXT_COLOR) viewModel.textColorCurrent.value = colorSelected
+        if (viewModel.textColorMode.value == TextColorMode.TEXT_HIGHLIGHT_COLOR) viewModel.textHighlightColorCurrent.value = colorSelected
         viewModel.featureExpandType.value = FeatureExpandType.PICK_COLOR
+        binding.rvColor.requestModelBuild()
     }
 
     override fun layoutRes(): Int = R.layout.dialog_text_input

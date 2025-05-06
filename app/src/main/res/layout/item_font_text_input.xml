@@ -37,7 +37,7 @@
             tools:text="Nunito"
             android:text="@{text}"
             android:textColor="@color/color_171717"
-            path="@{fontPath}"
+            fontPath="@{fontPath}"
             />
 
     </FrameLayout>

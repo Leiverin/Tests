@@ -16,7 +16,7 @@ class TextInputViewModel: BaseViewModel() {
     val colors = MutableLiveData(MMKVCache.colors)
     val fonts = MutableLiveData(MMKVCache.fonts)
 
-    val fontCurrent = MutableLiveData(MMKVCache.fonts.first())
+    val fontCurrent = MutableLiveData<TextFont>()
 
     val textColorCurrent = MutableLiveData(Color.parseColor("#171717"))
     val textHighlightColorCurrent = MutableLiveData(Color.parseColor("#171717"))
@@ -76,5 +76,13 @@ class TextInputViewModel: BaseViewModel() {
         }
     }
 
+    fun calculateColor(colorCode: Int, alpha: Float): Int{
+        return Color.argb(
+            (255 * alpha).toInt(),
+            Color.red(colorCode),
+            Color.green(colorCode),
+            Color.blue(colorCode)
+        )
+    }
 
 }

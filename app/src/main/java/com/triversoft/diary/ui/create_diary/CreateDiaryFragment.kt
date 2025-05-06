@@ -236,16 +236,19 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
     override fun addTextbox() {
         viewModel.addEmptyContent(ContentType.TEXT)
         addContentPopup?.dismiss()
+        binding.nestScroll.postDelayed({ binding.nestScroll.smoothScrollTo(0, binding.btnAddContent.bottom) }, 100)
     }
 
     override fun addImage() {
         viewModel.addEmptyContent(ContentType.IMAGE)
         addContentPopup?.dismiss()
+        binding.nestScroll.postDelayed({ binding.nestScroll.smoothScrollTo(0, binding.btnAddContent.bottom) }, 100)
     }
 
     override fun addCheckbox() {
         viewModel.addEmptyContent(ContentType.CHECKBOX)
         addContentPopup?.dismiss()
+        binding.nestScroll.postDelayed({ binding.nestScroll.smoothScrollTo(0, binding.btnAddContent.bottom) }, 100)
     }
 
     private fun showDialogTextInput(){

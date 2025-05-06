@@ -7,15 +7,21 @@ object MMKVUtils {
     var isFirstOpen: Boolean
         get() = MMKV.defaultMMKV().decodeBool(MMKVKey.IS_FIRST_OPEN, true)
         set(value) { MMKV.defaultMMKV().encode(MMKVKey.IS_FIRST_OPEN, value) }
+
     var isAskedFirst: Boolean
         get() = MMKV.defaultMMKV().decodeBool(MMKVKey.IS_ASKED_FIRST, false)
         set(value) { MMKV.defaultMMKV().encode(MMKVKey.IS_ASKED_FIRST, value) }
+
     var isAskedTwo: Boolean
         get() = MMKV.defaultMMKV().decodeBool(MMKVKey.IS_ASKED_TWO, false)
         set(value) { MMKV.defaultMMKV().encode(MMKVKey.IS_ASKED_TWO, value) }
+
     var langCode: String
         get() = MMKV.defaultMMKV().decodeString(MMKVKey.LANG_CODE, "") ?: ""
         set(value) { MMKV.defaultMMKV().encode(MMKVKey.LANG_CODE, value) }
 
+    var fontCurrent: Int
+        get() = MMKV.defaultMMKV().decodeInt(MMKVKey.FONT_CURRENT, 0)
+        set(value) { MMKV.defaultMMKV().encode(MMKVKey.FONT_CURRENT, value) }
 
 }

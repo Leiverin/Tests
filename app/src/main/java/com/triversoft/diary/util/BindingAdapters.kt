@@ -196,7 +196,7 @@ fun CardView.setBgColor(color: Int){
 }
 
 @BindingAdapter(
-    value = ["path", "fontStyle"],
+    value = ["fontPath", "fontStyle"],
     requireAll = false
 )
 fun TextView.setFontRes(path: String, fontStyle: Int? = null){
