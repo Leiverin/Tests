@@ -9,11 +9,11 @@
         
         <variable
             name="onCancel"
-            type="android.view.View.OnClickListener" />
+            type="kotlin.jvm.functions.Function0&lt;kotlin.Unit>" />
 
         <variable
             name="onClick"
-            type="android.view.View.OnClickListener" />
+            type="kotlin.jvm.functions.Function0&lt;kotlin.Unit>" />
 
     </data>
 
@@ -21,10 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:onClick="@{onClick}"
+        onPreventDoubleClick="@{onClick}"
         >
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/_64sdp"
@@ -33,8 +33,8 @@
             android:textColorHint="@color/color_6B6B6B"
             android:hint="@string/your_text_here"
             android:gravity="top"
+            onPreventDoubleClick="@{onClick}"
             android:text="@{description}"
-            android:enabled="false"
             style="@style/text_style_12_regular"
             android:textColor="@color/color_171717"
             android:layout_marginTop="@dimen/_12sdp"
@@ -48,7 +48,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_delete_view"
             android:layout_gravity="end"
-            android:onClick="@{onCancel}"
+            onPreventDoubleClick="@{onCancel}"
             />
 
     </FrameLayout>

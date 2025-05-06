@@ -21,6 +21,7 @@ import com.triversoft.diary.itemCheckbox
 import com.triversoft.diary.itemListPhotoSelected
 import com.triversoft.diary.itemTextbox
 import com.triversoft.diary.ui.base.BaseFragment
+import com.triversoft.diary.ui.dialog.text_input.TextInputDialog
 import com.triversoft.diary.ui.popup.AddContentPopup
 import com.triversoft.diary.ui.popup.StatusPopup
 import com.triversoft.diary.util.Constants
@@ -33,6 +34,7 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
 
     private var statusPopup: StatusPopup? = null
     private var addContentPopup: AddContentPopup? = null
+    private var textInputDialog: TextInputDialog? = null
 
     private val launchPhoto = registerForActivityResult(ActivityResultContracts.GetContent()){ uri ->
         if (uri != null){
@@ -92,10 +94,10 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
                             itemTextbox {
                                 id(content.id)
                                 description(content.text)
-                                onCancel { v ->
-                                    onCancelContent(content, v)
+                                onCancel {
+                                    onCancelContent(content)
                                 }
-                                onClick { v ->
+                                onClick {
                                     onFillText(content)
                                 }
                             }
@@ -106,13 +108,13 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
                                 id(content.id)
                                 isChecked(content.isChecked)
                                 description(content.text)
-                                onCancel { v ->
-                                    onCancelContent(content, v)
+                                onCancel {
+                                    onCancelContent(content)
                                 }
                                 onCheckedChange { _, isChecked ->
                                     onCheckedChange(content, isChecked)
                                 }
-                                onClick { _ ->
+                                onClick {
                                     onFillText(content)
                                 }
                             }
@@ -130,7 +132,7 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
                                     removePhoto(content, path)
                                 }
                                 onCancel { v ->
-                                    onCancelContent(content, v)
+                                    onCancelContent(content)
                                 }
                             }
                         }
@@ -146,7 +148,7 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
     }
 
     private fun onFillText(content: DiaryModel.Content) {
-
+        showDialogTextInput()
     }
 
     private fun removePhoto(content: DiaryModel.Content, path: String) {
@@ -158,7 +160,7 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
         launchPhoto.launch("image/*")
     }
 
-    private fun onCancelContent(content: DiaryModel.Content, v: View) {
+    private fun onCancelContent(content: DiaryModel.Content) {
         if (viewModel.contentCurrent.value == content)
             viewModel.contentCurrent.value = null
         viewModel.removeContent(content)
@@ -170,7 +172,11 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
 
     private fun initEvents() {
         setBackPressListener(binding.btnBack) {
-            popUpBackStack()
+            if (textInputDialog?.isAdded == true){
+                textInputDialog?.dismissDialog()
+            }else{
+                popUpBackStack()
+            }
         }
         binding.viewMood.setPreventDoubleClick {
             showPopupStatus(StatusPopup.StatusType.MOOD, it)
@@ -230,25 +236,22 @@ class CreateDiaryFragment: BaseFragment<FragmentCreateDairyBinding>(R. layout.fr
     override fun addTextbox() {
         viewModel.addEmptyContent(ContentType.TEXT)
         addContentPopup?.dismiss()
-        updateNewYPos()
     }
 
     override fun addImage() {
         viewModel.addEmptyContent(ContentType.IMAGE)
         addContentPopup?.dismiss()
-        updateNewYPos()
     }
 
     override fun addCheckbox() {
         viewModel.addEmptyContent(ContentType.CHECKBOX)
         addContentPopup?.dismiss()
-        updateNewYPos()
     }
 
-    private fun updateNewYPos(){
-        makeDelay(30) {
-            viewModel.oldYPosBtnAdd = binding.btnAddContent.y
-        }
+    private fun showDialogTextInput(){
+        textInputDialog?.dismissImmediately()
+        textInputDialog = TextInputDialog()
+        if(isAdded) textInputDialog?.showDialog(childFragmentManager)
     }
 
     override fun screenName(): String = ""

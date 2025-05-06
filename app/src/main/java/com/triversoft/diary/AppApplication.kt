@@ -10,6 +10,7 @@ import com.google.firebase.initialize
 import com.hjq.language.MultiLanguages
 import com.triversoft.diary.ui.splash.SplashFragment
 import com.tencent.mmkv.MMKV
+import com.triversoft.diary.util.CommonData
 
 class AppApplication: Application() {
 

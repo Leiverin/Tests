@@ -23,3 +23,9 @@ fun Uri.toPath(context: Context): String? {
     return file.absolutePath
 }
 
+fun String.upperFirstChar(): String{
+    if (this.isEmpty()) return this
+    return this.replaceFirstChar {
+        if (it.isLowerCase()) it.titlecase() else it.toString()
+    }
+}

@@ -14,11 +14,11 @@
 
         <variable
             name="onCancel"
-            type="android.view.View.OnClickListener" />
+            type="kotlin.jvm.functions.Function0&lt;kotlin.Unit>" />
 
         <variable
             name="onClick"
-            type="android.view.View.OnClickListener" />
+            type="kotlin.jvm.functions.Function0&lt;kotlin.Unit>" />
 
         <variable
             name="onCheckedChange"
@@ -62,7 +62,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 >
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/_16sdp"
@@ -70,8 +70,7 @@
                     android:textColorHint="@color/color_6B6B6B"
                     android:hint="@string/your_text_here"
                     android:text="@{description}"
-                    android:enabled="false"
-                    android:onClick="@{onClick}"
+                    onPreventDoubleClick="@{onClick}"
                     style="@style/text_style_12_regular"
                     android:textColor="@color/color_171717"
                     android:textCursorDrawable="@drawable/cursor_edit_text"
@@ -88,7 +87,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_delete_view"
             android:layout_gravity="end"
-            android:onClick="@{onCancel}"
+            onPreventDoubleClick="@{onCancel}"
             />
 
     </FrameLayout>

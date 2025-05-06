@@ -3,6 +3,8 @@ package com.triversoft.diary.data.models
 import android.graphics.Color
 import android.os.Parcelable
 import com.triversoft.diary.R
+import com.triversoft.diary.data.models.text.FontStyle
+import com.triversoft.diary.data.models.text.TextAlign
 import com.triversoft.diary.extension.px
 import com.triversoft.diary.util.CommonData
 import kotlinx.parcelize.Parcelize
@@ -33,7 +35,7 @@ data class DiaryModel(
     data class TextStyle(
         val fontRes: String? = null,
         val textColor: Int = Color.parseColor("#171717"),
-        val fontStyle: FontStyle = FontStyle.NORMAL,
+        val fontStyle: ArrayList<FontStyle> = arrayListOf(),
         val textAlign: TextAlign = TextAlign.START,
         val textSize: Float = 12f.px,
         val highlightColor: Int = Color.parseColor("#00FFFFFF"),

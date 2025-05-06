@@ -1,5 +1,7 @@
 package com.triversoft.diary.extension
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
@@ -97,4 +99,33 @@ fun View.dp(number: Number): Float {
 
 fun getDisplayMetric(context: Context?): DisplayMetrics {
     return if (context != null) context.resources.displayMetrics else Resources.getSystem().displayMetrics
+}
+
+fun View.visibleAnimTranslate(isVisible: Boolean, duration: Long = 300, onEnd: (() -> Unit)? = null) {
+    animate().cancel()
+    if (isVisible) {
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    onEnd?.invoke()
+                }
+            })
+    } else {
+        animate()
+            .alpha(0.0f)
+            .translationY((height * 1).toFloat())
+            .setDuration(duration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    onEnd?.invoke()
+                    visibility = View.GONE
+                }
+            })
+    }
 }

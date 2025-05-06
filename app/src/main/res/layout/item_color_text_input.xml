@@ -4,24 +4,44 @@
 
     <data>
         
+        <variable
+            name="color"
+            type="int" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp">
+    <FrameLayout
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:onClick="@{onClick}"
+        android:layout_marginEnd="@dimen/_8sdp"
+        >
 
         <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            app:cardBackgroundColor="@color/black"
+            app:cardElevation="0dp"
+            setBgColor="@{color}"
+            android:layout_gravity="center"
+            app:cardCornerRadius="@dimen/_8sdp"
+            />
+
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-            
-        </androidx.cardview.widget.CardView>
+            android:elevation="@dimen/_3sdp"
+            visible="@{isSelected}"
+            android:background="@drawable/bg_stroke_black_8rds"
+            />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

@@ -3,11 +3,15 @@ package com.triversoft.diary.util
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.graphics.Bitmap
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,6 +73,10 @@ fun View.visibleAnimAlpha(isVisible: Boolean) {
     }
 }
 
+@BindingAdapter(
+    value = ["visibleAnimTranslate", "onEndAnim"],
+    requireAll = false
+)
 fun View.visibleAnimTranslate(isVisible: Boolean, onEnd: (() -> Unit)? = null) {
     animate().cancel()
     if (isVisible) {
@@ -120,7 +128,7 @@ fun ImageView.loadImage(
 }
 
 @BindingAdapter("onPreventDoubleClick")
-fun View.onPreventDoubleClick(action: () -> Any?){
+fun View.onPreventDoubleClick(action: () -> Unit){
     this.setOnClickListener {
         if (this.isEnabled){
             this.isEnabled = false
@@ -180,4 +188,28 @@ fun ImageView.loadDrawableWithAnim(resId: Int){
                     .setDuration(150)
             }
         })
+}
+
+@BindingAdapter("setBgColor")
+fun CardView.setBgColor(color: Int){
+    this.setCardBackgroundColor(color)
+}
+
+@BindingAdapter(
+    value = ["path", "fontStyle"],
+    requireAll = false
+)
+fun TextView.setFontRes(path: String, fontStyle: Int? = null){
+    val typeface = Typeface.createFromAsset(context.assets, path)
+    when(fontStyle){
+        Constants.FONT_REGULAR -> setTypeface(typeface, Typeface.NORMAL)
+        Constants.FONT_ITALIC -> setTypeface(typeface, Typeface.ITALIC)
+        Constants.FONT_BOLD -> setTypeface(typeface, Typeface.BOLD)
+        else -> setTypeface(typeface, Typeface.NORMAL)
+    }
+}
+
+@BindingAdapter("setTintColor")
+fun ImageView.setTintColor(color: Int){
+    setColorFilter(color)
 }

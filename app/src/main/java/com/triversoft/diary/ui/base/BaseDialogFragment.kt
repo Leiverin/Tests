@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
@@ -28,28 +29,23 @@ abstract class BaseDialogFragment<M: ViewDataBinding>: DialogFragment(){
 
     protected lateinit var binding: M
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutRes(), null, false)
-        dialog?.setContentView(binding.root)
+        binding = DataBindingUtil.inflate(layoutInflater, layoutRes(), null, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setCancelable(false)
         setLayout(widthPc = 0.85f, heightPc = 0.9f, isHeightWrap = true)
         onViewReady()
-    }
-
-
-    fun showDialog(fragmentManager: FragmentManager){
-        if (this.dialog?.isShowing == false){
-            show(fragmentManager, this::class.toString())
-        }
-    }
-
-    fun dismissDialog(){
-        if (this.dialog?.isShowing == true){
-            dismiss()
-        }
     }
 
     fun setLayout(widthPc: Float = 0.9f, heightPc: Float = 0.9f, isHeightWrap: Boolean = false) {
@@ -63,6 +59,12 @@ abstract class BaseDialogFragment<M: ViewDataBinding>: DialogFragment(){
             (screenHeight * heightPc).toInt()
         }
         dialog?.window?.attributes = params
+    }
+
+    fun dismissImmediately(){
+        if (isAdded && this.dialog?.isShowing != false){
+            dismiss()
+        }
     }
 
 }

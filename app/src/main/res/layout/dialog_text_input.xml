@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.triversoft.diary.data.models.text.FeatureExpandType"/>
+        <import type="com.triversoft.diary.data.models.text.FontStyle"/>
+        <import type="com.triversoft.diary.data.models.text.TextColorMode"/>
+        <import type="com.triversoft.diary.data.models.text.TextAlign"/>
+        <import type="com.triversoft.diary.data.models.text.TextType"/>
+
+        <variable
+            name="viewModel"
+            type="com.triversoft.diary.ui.dialog.text_input.TextInputViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black_50"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewEdit"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_white_12rds_rounded_top"
@@ -22,6 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/_80sdp"
             android:layout_marginHorizontal="@dimen/_8sdp"
+            android:onClick="@{null}"
             >
 
             <RelativeLayout
@@ -92,6 +106,8 @@
             android:layout_height="@dimen/_24sdp"
             android:src="@drawable/ic_close_tool"
             android:scaleType="fitXY"
+            android:visibility="gone"
+            visibleAnimAlpha="@{viewModel.featureExpandType == FeatureExpandType.NONE}"
             app:layout_constraintBottom_toTopOf="@+id/viewTools"
             app:layout_constraintTop_toTopOf="@+id/viewTools"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +116,7 @@
             />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/viewSubEdit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_68sdp"
             app:cardElevation="@dimen/_11sdp"
@@ -107,14 +124,17 @@
             app:cardCornerRadius="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            visibleAnimTranslate="@{viewModel.featureExpandType != FeatureExpandType.NONE}"
             app:layout_constraintBottom_toTopOf="@id/viewTools"
+            android:visibility="gone"
+            android:alpha="0"
             >
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                visibleAnimAlpha="@{viewModel.featureExpandType == FeatureExpandType.PICK_COLOR}"
                 android:layout_marginHorizontal="@dimen/_28sdp"
                 >
 
@@ -125,6 +145,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:orientation="horizontal"
                     android:layout_weight="1"
+                    tools:listitem="@layout/item_color_text_input"
                     />
 
                 <View
@@ -151,10 +172,12 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                visibleAnimAlpha="@{viewModel.featureExpandType == FeatureExpandType.ADD_COLOR}"
+                >
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/btnBackPopupFeature"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_alignParentStart="true"
@@ -194,17 +217,42 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_toStartOf="@+id/cvColorCustom"
-                    android:layout_toEndOf="@+id/imageView"
+                    android:layout_toEndOf="@+id/btnBackPopupFeature"
                     android:orientation="vertical"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
                     >
 
+                    <com.triversoft.diary.ui.views.HueSliderView
+                        android:id="@+id/hueView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_12sdp"
+                        />
 
+                    <com.triversoft.diary.ui.views.ColorOpacitySliderView
+                        android:id="@+id/hueOpacityView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        />
 
                 </LinearLayout>
 
             </RelativeLayout>
+            
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rvFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                tools:visibility="gone"
+                visibleAnimAlpha="@{viewModel.featureExpandType == FeatureExpandType.FONT}"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -217,11 +265,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintDimensionRatio="360:196"
             app:cardElevation="@dimen/_12sdp"
+            tools:visibility="visible"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <LinearLayout
                     android:id="@+id/btnFont"
@@ -232,10 +282,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/bg_stroke_6b6b6b_12rds"
+                    android:background="@{viewModel.featureExpandType == FeatureExpandType.FONT ? @drawable/bg_stroke_e2f2ff_12rds : @drawable/bg_stroke_6b6b6b_12rds }"
                     >
                     
                     <TextView
+                        android:id="@+id/tvFontCurrent"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="center|start"
@@ -268,7 +319,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/_4sdp"
                     android:layout_marginStart="@dimen/_16sdp"
-                    android:background="@drawable/bg_circle_transparent_4rds"
+                    android:background="@{viewModel.textColorMode == TextColorMode.TEXT_COLOR ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
 
                     >
                     
@@ -277,6 +328,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/ic_color_letter"
                         android:scaleType="fitXY"
+                        setTintColor="@{viewModel.textColorCurrent}"
                         />
                     
                     <androidx.cardview.widget.CardView
@@ -287,6 +339,7 @@
                         app:cardBackgroundColor="@color/color_171717"
                         android:layout_marginTop="@dimen/_2sdp"
                         app:cardCornerRadius="@dimen/_3sdp"
+                        setBgColor="@{viewModel.textColorCurrent}"
                         />
                     
                 </LinearLayout>
@@ -302,7 +355,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/_4sdp"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:background="@drawable/bg_circle_transparent_4rds"
+                    android:background="@{viewModel.textColorMode == TextColorMode.TEXT_HIGHLIGHT_COLOR ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
 
                     >
 
@@ -311,6 +364,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/ic_color_letter_highlight"
                         android:scaleType="fitXY"
+                        setTintColor="@{viewModel.textHighlightColorCurrent}"
                         />
 
                     <androidx.cardview.widget.CardView
@@ -321,6 +375,7 @@
                         app:cardBackgroundColor="@color/color_171717"
                         android:layout_marginTop="@dimen/_2sdp"
                         app:cardCornerRadius="@dimen/_3sdp"
+                        setBgColor="@{viewModel.textHighlightColorCurrent}"
                         />
 
                 </LinearLayout>
@@ -350,14 +405,14 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_e2f2ff_4rds"
+                            android:background="@{viewModel.alignCurrent == TextAlign.START ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                             >
 
                             <ImageView
                                 android:layout_width="@dimen/_18sdp"
                                 android:layout_height="@dimen/_18sdp"
-                                android:layout_centerInParent="true"
                                 android:src="@drawable/ic_letter_start"
+                                android:layout_centerInParent="true"
                                 />
 
                         </RelativeLayout>
@@ -368,7 +423,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_marginHorizontal="@dimen/_8sdp"
-                            android:background="@drawable/bg_e2f2ff_4rds"
+                            android:background="@{viewModel.alignCurrent == TextAlign.CENTER ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                             >
 
                             <ImageView
@@ -385,7 +440,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_e2f2ff_4rds"
+                            android:background="@{viewModel.alignCurrent == TextAlign.END ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                             >
 
                             <ImageView
@@ -408,7 +463,7 @@
                         android:id="@+id/btnBold"
                         android:layout_width="@dimen/_28sdp"
                         android:layout_height="@dimen/_28sdp"
-                        android:background="@drawable/bg_e2f2ff_4rds"
+                        android:background="@{viewModel.fontStyles.contains(FontStyle.BOLD) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                         android:layout_marginStart="@dimen/_12sdp"
                         >
 
@@ -425,8 +480,8 @@
                         android:id="@+id/btnItalic"
                         android:layout_width="@dimen/_28sdp"
                         android:layout_height="@dimen/_28sdp"
-                        android:background="@drawable/bg_e2f2ff_4rds"
                         android:layout_marginStart="@dimen/_12sdp"
+                        android:background="@{viewModel.fontStyles.contains(FontStyle.ITALIC) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                         >
 
                         <ImageView
@@ -442,8 +497,8 @@
                         android:id="@+id/btnUnderline"
                         android:layout_width="@dimen/_28sdp"
                         android:layout_height="@dimen/_28sdp"
-                        android:background="@drawable/bg_e2f2ff_4rds"
                         android:layout_marginStart="@dimen/_12sdp"
+                        android:background="@{viewModel.fontStyles.contains(FontStyle.UNDERLINE) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                         >
 
                         <ImageView
@@ -459,8 +514,8 @@
                         android:id="@+id/btnStrikeThrough"
                         android:layout_width="@dimen/_28sdp"
                         android:layout_height="@dimen/_28sdp"
-                        android:background="@drawable/bg_e2f2ff_4rds"
                         android:layout_marginStart="@dimen/_12sdp"
+                        android:background="@{viewModel.fontStyles.contains(FontStyle.STRIKETHROUGH) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
                         >
 
                         <ImageView
@@ -487,10 +542,11 @@
                     >
 
                     <RelativeLayout
+                        android:id="@+id/btnTitle"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_e2f2ff_8rds"
+                        android:background="@{viewModel.textType == TextType.TITLE ? @drawable/bg_e2f2ff_8rds : @drawable/bg_circle_transparent_4rds }"
                         >
                         
                         <TextView
@@ -503,10 +559,11 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/btnSubTitle"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_e2f2ff_8rds"
+                        android:background="@{viewModel.textType == TextType.SUBTITLE ? @drawable/bg_e2f2ff_8rds : @drawable/bg_circle_transparent_4rds }"
                         >
 
                         <TextView
@@ -519,10 +576,11 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/btnContent"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_e2f2ff_8rds"
+                        android:background="@{viewModel.textType == TextType.CONTENT ? @drawable/bg_e2f2ff_8rds : @drawable/bg_circle_transparent_4rds }"
                         >
 
                         <TextView

@@ -7,16 +7,25 @@ import android.widget.EditText
 import androidx.navigation.fragment.NavHostFragment
 import com.hjq.language.MultiLanguages
 import com.triversoft.diary.R
+import com.triversoft.diary.data.caching.MMKVCache
 import com.triversoft.diary.databinding.ActivityMainBinding
 import com.triversoft.diary.extension.hideKeyboard
 import com.triversoft.diary.ui.base.BaseActivity
+import com.triversoft.diary.util.CommonData
 
 class MainActivity: BaseActivity<ActivityMainBinding>() {
 
     override fun layoutRes(): Int = R.layout.activity_main
 
     override fun initView() {
+        initData()
         setUpNav()
+    }
+
+    private fun initData() {
+        if (MMKVCache.fonts.isEmpty()){
+            MMKVCache.fonts = CommonData.fonts(context = this)
+        }
     }
 
     private fun setUpNav() {

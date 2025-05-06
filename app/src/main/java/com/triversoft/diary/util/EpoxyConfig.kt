@@ -15,6 +15,8 @@ import com.triversoft.diary.R
         R.layout.item_list_photo_selected,
         R.layout.item_photo_selected,
         R.layout.item_button_add_content,
+        R.layout.item_color_text_input,
+        R.layout.item_font_text_input,
     ]
 )
 interface EpoxyConfig

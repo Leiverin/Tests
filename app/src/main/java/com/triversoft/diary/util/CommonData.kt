@@ -1,8 +1,13 @@
 package com.triversoft.diary.util
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import com.triversoft.diary.R
 import com.triversoft.diary.data.models.Language
+import com.triversoft.diary.data.models.text.TextFont
+import com.triversoft.diary.extension.upperFirstChar
+import org.w3c.dom.Text
 
 object CommonData {
 
@@ -62,5 +67,28 @@ object CommonData {
         Triple(4, context?.getString(R.string.cold) ?: "Cold", R.drawable.ic_cold),
         Triple(5, context?.getString(R.string.windy) ?: "Windy", R.drawable.ic_windy),
     )
+
+    fun colors() = arrayListOf(
+        Color.parseColor("#4E9CF6"),
+        Color.parseColor("#E899A4"),
+        Color.parseColor("#59B5C9"),
+        Color.parseColor("#ECB64D"),
+        Color.parseColor("#A18CE0"),
+        Color.parseColor("#6B6B6B"),
+        Color.parseColor("#171717"),
+        Color.parseColor("#ECECEC"),
+    )
+
+    fun fonts(context: Context): ArrayList<TextFont>{
+        val fonts = arrayListOf<TextFont>()
+        context.assets.list("fonts")?.forEachIndexed { index, path ->
+            val absolutePaths = arrayListOf<String>()
+            context.assets.list("fonts/$path")?.forEachIndexed { index, absolutePath ->
+                absolutePaths.add("fonts/$path/$absolutePath")
+            }
+            fonts.add(TextFont(id = index, text = path.upperFirstChar(), parentPath = "fonts/$path", paths = absolutePaths))
+        }
+        return fonts
+    }
 
 }
