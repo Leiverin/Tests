@@ -265,7 +265,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintDimensionRatio="360:196"
             app:cardElevation="@dimen/_12sdp"
-            tools:visibility="visible"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -462,7 +461,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
-                    
+
                     <RelativeLayout
                         android:id="@+id/btnBold"
                         android:layout_width="@dimen/_28sdp"
@@ -530,7 +529,7 @@
                             />
 
                     </RelativeLayout>
-                    
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -613,6 +612,136 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-        
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_44sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardElevation="@dimen/_16sdp"
+            app:cardCornerRadius="0dp"
+            app:cardBackgroundColor="@color/white"
+            >
+
+            <LinearLayout
+                android:id="@+id/viewSmallFeature"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center|start"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/btnBoldKeyboard"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:background="@{viewModel.fontStyles.contains(FontStyle.BOLD) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:src="@drawable/ic_bold"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnItalicKeyboard"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:background="@{viewModel.fontStyles.contains(FontStyle.ITALIC) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:src="@drawable/ic_italic"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnUnderlineKeyboard"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:background="@{viewModel.fontStyles.contains(FontStyle.UNDERLINE) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:src="@drawable/ic_underline"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnStrikeThroughKeyboard"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:background="@{viewModel.fontStyles.contains(FontStyle.STRIKETHROUGH) ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:src="@drawable/ic_strike_through"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnAlignEndKeyboard"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:background="@{viewModel.alignCurrent == TextAlign.END ? @drawable/bg_e2f2ff_4rds : @drawable/bg_circle_transparent_4rds }"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_letter_end"
+                        />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    style="@style/text_style_14_bold"
+                    android:text="@string/more"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/color_171717"
+                    fontPath="@{viewModel.fontCurrent.pathMedium}"
+                    fontStyle="@{0}"
+                    android:paddingHorizontal="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:background="@drawable/bg_circle_transparent_4rds"
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

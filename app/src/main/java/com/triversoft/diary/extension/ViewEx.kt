@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Rect
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
@@ -127,5 +128,23 @@ fun View.visibleAnimTranslate(isVisible: Boolean, duration: Long = 300, onEnd: (
                     visibility = View.GONE
                 }
             })
+    }
+}
+
+fun View.observeKeyboardVisibility(onKeyboardVisibilityChanged: (Boolean) -> Unit) {
+    val rootView = this
+    var isKeyboardVisible = false
+    rootView.viewTreeObserver.addOnGlobalLayoutListener {
+        val rect = Rect()
+        rootView.getWindowVisibleDisplayFrame(rect)
+        val screenHeight = rootView.rootView.height
+        val keypadHeight = screenHeight - rect.bottom
+
+        val isVisibleNow = keypadHeight > screenHeight * 0.15
+
+        if (isVisibleNow != isKeyboardVisible) {
+            isKeyboardVisible = isVisibleNow
+            onKeyboardVisibilityChanged(isKeyboardVisible)
+        }
     }
 }

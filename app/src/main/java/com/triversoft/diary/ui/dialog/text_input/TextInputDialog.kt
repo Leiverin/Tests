@@ -1,8 +1,11 @@
 package com.triversoft.diary.ui.dialog.text_input
 
+import android.text.Editable
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -20,6 +23,7 @@ import com.triversoft.diary.databinding.DialogTextInputBinding
 import com.triversoft.diary.extension.beGone
 import com.triversoft.diary.extension.beVisible
 import com.triversoft.diary.extension.makeDelay
+import com.triversoft.diary.extension.observeKeyboardVisibility
 import com.triversoft.diary.extension.onGlobalLayout
 import com.triversoft.diary.extension.setBackPressListener
 import com.triversoft.diary.extension.setPreventDoubleClick
@@ -36,9 +40,10 @@ import kotlinx.coroutines.launch
 class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
 
     private val viewModel: TextInputViewModel by viewModels()
+    private var isModifying = false
 
     override fun onViewReady() {
-        setLayout(1f, 1f, false)
+        setLayoutFull()
         observerData()
         initData()
         initEvents()
@@ -124,6 +129,7 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
             dismissDialog()
         }
         binding.edContent.setOnFocusChangeListener { view, b ->
+            Log.d("TAGGGGGG", "initEvents: ${b}")
         }
         binding.btnCloseTools.setPreventDoubleClick {
             binding.btnCloseTools.beGone()
@@ -197,9 +203,19 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
         binding.hueOpacityView.setOnAlphaChangedListener {
             binding.cvColorCustom.setCardBackgroundColor(viewModel.calculateColor(binding.hueOpacityView.selectedColor, binding.hueOpacityView.alphaValue))
         }
-        binding.edContent.doOnTextChanged { text, start, before, count ->
-            
+        binding.edContent.doAfterTextChanged { s ->
+            doOnTextChanged(s)
         }
+        binding.root.observeKeyboardVisibility { isVisible ->
+
+        }
+    }
+
+    private fun doOnTextChanged(s: Editable?) {
+        if (isModifying || s.isNullOrEmpty()) return
+        isModifying = true
+
+        isModifying = false
     }
 
     private fun onDoneCustomColor() {

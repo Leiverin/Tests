@@ -13,6 +13,9 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
@@ -36,6 +39,7 @@ abstract class BaseDialogFragment<M: ViewDataBinding>: DialogFragment(){
     ): View? {
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding = DataBindingUtil.inflate(layoutInflater, layoutRes(), null, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -44,8 +48,13 @@ abstract class BaseDialogFragment<M: ViewDataBinding>: DialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCancelable(false)
-        setLayout(widthPc = 0.85f, heightPc = 0.9f, isHeightWrap = true)
+//        setLayoutFull()
+//        setLayout(widthPc = 0.85f, heightPc = 0.9f, isHeightWrap = true)
         onViewReady()
+    }
+
+    fun setLayoutFull(){
+        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
     }
 
     fun setLayout(widthPc: Float = 0.9f, heightPc: Float = 0.9f, isHeightWrap: Boolean = false) {
@@ -66,5 +75,22 @@ abstract class BaseDialogFragment<M: ViewDataBinding>: DialogFragment(){
             dismiss()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        hideSystemNavigation()
+    }
+
+    private fun hideSystemNavigation(){
+        activity?.let { act ->
+            WindowCompat.getInsetsController(act.window, binding.root).let {
+                it.hide(WindowInsetsCompat.Type.navigationBars())
+                it.hide(WindowInsetsCompat.Type.statusBars())
+                it.systemBarsBehavior =
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        }
+    }
+
 
 }
