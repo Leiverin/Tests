@@ -553,6 +553,7 @@
                         >
                         
                         <TextView
+                            android:id="@+id/tvTitleOpt"
                             style="@style/text_style_24_bold"
                             android:text="@string/title_normal"
                             android:layout_centerInParent="true"
@@ -574,6 +575,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvSubContentOpt"
                             style="@style/text_style_20_medium"
                             android:text="@string/subtitle"
                             android:layout_centerInParent="true"
@@ -595,6 +597,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvContentOpt"
                             style="@style/text_style_14_regular"
                             android:text="@string/content"
                             android:layout_centerInParent="true"

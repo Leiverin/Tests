@@ -54,7 +54,6 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
     private val viewModel: TextInputViewModel by viewModels()
     private var isModifying = false
     private var previousTextLength = 0
-    private var selStart = 0
     private var removeCharCount = 0
 
     override fun onViewReady() {
@@ -143,9 +142,6 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
         binding.btnDone.setPreventDoubleClick {
             dismissDialog()
         }
-        binding.edContent.setOnFocusChangeListener { view, b ->
-//            Log.d("TAGGGGGG", "initEvents: ${b}")
-        }
         binding.btnCloseTools.setPreventDoubleClick {
             binding.btnCloseTools.beGone()
             binding.viewTools.visibleAnimTranslate(false)
@@ -222,15 +218,17 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
         // Event edit text
         binding.edContent.doBeforeTextChanged { text, start, count, after ->
             previousTextLength = text?.length ?: 0
-            selStart = binding.edContent.selectionStart
+            viewModel.selStart = binding.edContent.selectionStart - 1
             removeCharCount = count
         }
         binding.edContent.doAfterTextChanged { s ->
             doOnTextChanged(s)
         }
         binding.edContent.onSelectionChanged = { selStart, selEnd ->
-
+            viewModel.selStartByUser = selStart
+            viewModel.selEndByUser = selEnd
         }
+
         binding.root.observeKeyboardVisibility { isVisible ->
             if (isVisible){
                 binding.viewSubEdit.beGone()
@@ -241,6 +239,7 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
                 binding.btnCloseTools.visibleAnimAlpha(true)
                 binding.viewTools.visibleAnimTranslate(true)
                 binding.viewSmallFeature.visibleAnimTranslate(false)
+                viewModel.featureExpandType.value = viewModel.featureExpandType.value
             }
         }
     }
@@ -250,7 +249,6 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
             if (isModifying || s.isNullOrEmpty()) return
             if (previousTextLength >= s.length) {
                 removeChar()
-                Log.d("TAGGGGG", "doOnTextChanged: ${viewModel.textStyleList}")
                 return
             }
             isModifying = true
@@ -260,31 +258,23 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
             val typefaceSpan = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) TypefaceSpan(tp) else CustomTypefaceSpan(tp)
             val bgSpan = BackgroundColorSpan(viewModel.textHighlightColorCurrent.value ?: Color.parseColor("#FFFFFF"))
 
-            spannable.setSpan(colorSpan, selStart, selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannable.setSpan(typefaceSpan, selStart, selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannable.setSpan(bgSpan, selStart, selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(colorSpan, viewModel.selStart, viewModel.selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(typefaceSpan, viewModel.selStart, viewModel.selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(bgSpan, viewModel.selStart, viewModel.selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-            viewModel.textStyleList.add(selStart, DiaryModel.TextStyle(
-                char = s[selStart],
-                fontRes = viewModel.fontCurrent.value?.getPathRegular(),
-                textColor = viewModel.textColorCurrent.value,
-                fontStyle = viewModel.fontStyles.value,
-                textAlign = viewModel.alignCurrent.value,
-                textSize = 24f.dp,
-                highlightColor = viewModel.textHighlightColorCurrent.value,
-            ))
-            Log.d("TAGGGGG", "doOnTextChanged: ${viewModel.textStyleList}")
-            val cursor = binding.edContent.selectionStart
+            // Save char
+            viewModel.saveCharacter(s.toString())
+
             binding.edContent.text = spannable
-            binding.edContent.setSelection(cursor)
+            binding.edContent.setSelection(binding.edContent.selectionStart)
             isModifying = false
         }
     }
 
     private fun removeChar() {
         for (i in 0 until removeCharCount){
-            if (selStart < viewModel.textStyleList.size){
-                viewModel.textStyleList.removeAt(selStart)
+            if (viewModel.selStart < viewModel.textStyleList.size){
+                viewModel.textStyleList.removeAt(viewModel.selStart)
             }
         }
     }

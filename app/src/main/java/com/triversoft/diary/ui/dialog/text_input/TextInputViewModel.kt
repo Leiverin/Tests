@@ -10,6 +10,7 @@ import com.triversoft.diary.data.models.text.TextAlign
 import com.triversoft.diary.data.models.text.TextColorMode
 import com.triversoft.diary.data.models.text.TextFont
 import com.triversoft.diary.data.models.text.TextType
+import com.triversoft.diary.extension.dp
 import com.triversoft.diary.ui.base.BaseViewModel
 
 class TextInputViewModel: BaseViewModel() {
@@ -30,6 +31,10 @@ class TextInputViewModel: BaseViewModel() {
     private val _fontStyles = arrayListOf<FontStyle>()
 
     val textStyleList = arrayListOf<DiaryModel.TextStyle>()
+
+    var selStartByUser = 0
+    var selEndByUser = 0
+    var selStart = 0
 
     fun toggleStyle(style: FontStyle){
         if (!_fontStyles.contains(style)){
@@ -86,5 +91,19 @@ class TextInputViewModel: BaseViewModel() {
             Color.blue(colorCode)
         )
     }
+
+    fun saveCharacter(s: String){
+        textStyleList.add(selStart, DiaryModel.TextStyle(
+            char = s[selStart],
+            fontRes = fontCurrent.value?.getPathRegular(),
+            textColor = textColorCurrent.value,
+            fontStyle = fontStyles.value,
+            textAlign = alignCurrent.value,
+            textSize = 24f.dp,
+            highlightColor = textHighlightColorCurrent.value,
+        ))
+    }
+
+    fun isHighlightMode(): Boolean = selStartByUser == selEndByUser
 
 }
