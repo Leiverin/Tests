@@ -78,7 +78,7 @@ abstract class BaseDialogFragment<M: ViewDataBinding>: DialogFragment(){
 
     override fun onResume() {
         super.onResume()
-        hideSystemNavigation()
+//        hideSystemNavigation()
     }
 
     private fun hideSystemNavigation(){

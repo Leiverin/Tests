@@ -79,7 +79,7 @@
 
             </RelativeLayout>
 
-            <EditText
+            <com.triversoft.diary.ui.views.TextStyleEditText
                 android:id="@+id/edContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -614,6 +614,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/viewSmallFeature"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -622,10 +623,10 @@
             app:cardElevation="@dimen/_16sdp"
             app:cardCornerRadius="0dp"
             app:cardBackgroundColor="@color/white"
+            android:visibility="gone"
             >
 
             <LinearLayout
-                android:id="@+id/viewSmallFeature"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -730,8 +731,6 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textColor="@color/color_171717"
-                    fontPath="@{viewModel.fontCurrent.pathMedium}"
-                    fontStyle="@{0}"
                     android:paddingHorizontal="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_4sdp"
                     android:paddingVertical="@dimen/_4sdp"
@@ -741,7 +740,6 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

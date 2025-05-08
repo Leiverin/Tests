@@ -3,6 +3,7 @@ package com.triversoft.diary.ui.dialog.text_input
 import android.graphics.Color
 import androidx.lifecycle.MutableLiveData
 import com.triversoft.diary.data.caching.MMKVCache
+import com.triversoft.diary.data.models.DiaryModel
 import com.triversoft.diary.data.models.text.FeatureExpandType
 import com.triversoft.diary.data.models.text.FontStyle
 import com.triversoft.diary.data.models.text.TextAlign
@@ -10,7 +11,6 @@ import com.triversoft.diary.data.models.text.TextColorMode
 import com.triversoft.diary.data.models.text.TextFont
 import com.triversoft.diary.data.models.text.TextType
 import com.triversoft.diary.ui.base.BaseViewModel
-import com.triversoft.diary.util.CommonData
 
 class TextInputViewModel: BaseViewModel() {
     val colors = MutableLiveData(MMKVCache.colors)
@@ -19,7 +19,7 @@ class TextInputViewModel: BaseViewModel() {
     val fontCurrent = MutableLiveData<TextFont>()
 
     val textColorCurrent = MutableLiveData(Color.parseColor("#171717"))
-    val textHighlightColorCurrent = MutableLiveData(Color.parseColor("#171717"))
+    val textHighlightColorCurrent = MutableLiveData(Color.parseColor("#FFFFFF"))
     val textColorMode = MutableLiveData(TextColorMode.NORMAL)
 
     val alignCurrent = MutableLiveData(TextAlign.START)
@@ -28,6 +28,8 @@ class TextInputViewModel: BaseViewModel() {
 
     val fontStyles = MutableLiveData<ArrayList<FontStyle>>()
     private val _fontStyles = arrayListOf<FontStyle>()
+
+    val textStyleList = arrayListOf<DiaryModel.TextStyle>()
 
     fun toggleStyle(style: FontStyle){
         if (!_fontStyles.contains(style)){

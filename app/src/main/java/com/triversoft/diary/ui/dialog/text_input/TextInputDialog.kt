@@ -1,6 +1,14 @@
 package com.triversoft.diary.ui.dialog.text_input
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.os.Build
 import android.text.Editable
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.TypefaceSpan
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
@@ -13,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import com.triversoft.diary.R
 import com.triversoft.diary.data.caching.MMKVCache
 import com.triversoft.diary.data.mmkv.MMKVUtils
+import com.triversoft.diary.data.models.DiaryModel
 import com.triversoft.diary.data.models.text.FeatureExpandType
 import com.triversoft.diary.data.models.text.FontStyle
 import com.triversoft.diary.data.models.text.TextAlign
@@ -22,6 +31,7 @@ import com.triversoft.diary.data.models.text.TextType
 import com.triversoft.diary.databinding.DialogTextInputBinding
 import com.triversoft.diary.extension.beGone
 import com.triversoft.diary.extension.beVisible
+import com.triversoft.diary.extension.dp
 import com.triversoft.diary.extension.makeDelay
 import com.triversoft.diary.extension.observeKeyboardVisibility
 import com.triversoft.diary.extension.onGlobalLayout
@@ -31,6 +41,8 @@ import com.triversoft.diary.extension.visibleAnimTranslate
 import com.triversoft.diary.itemColorTextInput
 import com.triversoft.diary.itemFontTextInput
 import com.triversoft.diary.ui.base.BaseDialogFragment
+import com.triversoft.diary.util.help.CustomTypefaceSpan
+import com.triversoft.diary.util.visible
 import com.triversoft.diary.util.visibleAnimAlpha
 import com.triversoft.diary.util.visibleAnimTranslate
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +53,9 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
 
     private val viewModel: TextInputViewModel by viewModels()
     private var isModifying = false
+    private var previousTextLength = 0
+    private var selStart = 0
+    private var removeCharCount = 0
 
     override fun onViewReady() {
         setLayoutFull()
@@ -129,7 +144,7 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
             dismissDialog()
         }
         binding.edContent.setOnFocusChangeListener { view, b ->
-            Log.d("TAGGGGGG", "initEvents: ${b}")
+//            Log.d("TAGGGGGG", "initEvents: ${b}")
         }
         binding.btnCloseTools.setPreventDoubleClick {
             binding.btnCloseTools.beGone()
@@ -203,19 +218,75 @@ class TextInputDialog: BaseDialogFragment<DialogTextInputBinding>() {
         binding.hueOpacityView.setOnAlphaChangedListener {
             binding.cvColorCustom.setCardBackgroundColor(viewModel.calculateColor(binding.hueOpacityView.selectedColor, binding.hueOpacityView.alphaValue))
         }
+
+        // Event edit text
+        binding.edContent.doBeforeTextChanged { text, start, count, after ->
+            previousTextLength = text?.length ?: 0
+            selStart = binding.edContent.selectionStart
+            removeCharCount = count
+        }
         binding.edContent.doAfterTextChanged { s ->
             doOnTextChanged(s)
         }
-        binding.root.observeKeyboardVisibility { isVisible ->
+        binding.edContent.onSelectionChanged = { selStart, selEnd ->
 
+        }
+        binding.root.observeKeyboardVisibility { isVisible ->
+            if (isVisible){
+                binding.viewSubEdit.beGone()
+                binding.viewSmallFeature.visibleAnimTranslate(true)
+                binding.btnCloseTools.beGone()
+                binding.viewTools.visibleAnimTranslate(false)
+            }else{
+                binding.btnCloseTools.visibleAnimAlpha(true)
+                binding.viewTools.visibleAnimTranslate(true)
+                binding.viewSmallFeature.visibleAnimTranslate(false)
+            }
         }
     }
 
     private fun doOnTextChanged(s: Editable?) {
-        if (isModifying || s.isNullOrEmpty()) return
-        isModifying = true
+        runCatching {
+            if (isModifying || s.isNullOrEmpty()) return
+            if (previousTextLength >= s.length) {
+                removeChar()
+                Log.d("TAGGGGG", "doOnTextChanged: ${viewModel.textStyleList}")
+                return
+            }
+            isModifying = true
+            val spannable = SpannableStringBuilder(s)
+            val colorSpan = ForegroundColorSpan(viewModel.textColorCurrent.value ?: Color.parseColor("#171717"))
+            val tp = Typeface.createFromAsset(context?.assets, viewModel.fontCurrent.value?.getPathRegular())
+            val typefaceSpan = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) TypefaceSpan(tp) else CustomTypefaceSpan(tp)
+            val bgSpan = BackgroundColorSpan(viewModel.textHighlightColorCurrent.value ?: Color.parseColor("#FFFFFF"))
 
-        isModifying = false
+            spannable.setSpan(colorSpan, selStart, selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(typefaceSpan, selStart, selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(bgSpan, selStart, selStart + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            viewModel.textStyleList.add(selStart, DiaryModel.TextStyle(
+                char = s[selStart],
+                fontRes = viewModel.fontCurrent.value?.getPathRegular(),
+                textColor = viewModel.textColorCurrent.value,
+                fontStyle = viewModel.fontStyles.value,
+                textAlign = viewModel.alignCurrent.value,
+                textSize = 24f.dp,
+                highlightColor = viewModel.textHighlightColorCurrent.value,
+            ))
+            Log.d("TAGGGGG", "doOnTextChanged: ${viewModel.textStyleList}")
+            val cursor = binding.edContent.selectionStart
+            binding.edContent.text = spannable
+            binding.edContent.setSelection(cursor)
+            isModifying = false
+        }
+    }
+
+    private fun removeChar() {
+        for (i in 0 until removeCharCount){
+            if (selStart < viewModel.textStyleList.size){
+                viewModel.textStyleList.removeAt(selStart)
+            }
+        }
     }
 
     private fun onDoneCustomColor() {

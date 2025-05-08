@@ -33,13 +33,13 @@ data class DiaryModel(
 
     @Parcelize
     data class TextStyle(
+        val char: Char? = null,
         val fontRes: String? = null,
-        val textColor: Int = Color.parseColor("#171717"),
-        val fontStyle: ArrayList<FontStyle> = arrayListOf(),
-        val textAlign: TextAlign = TextAlign.START,
-        val textSize: Float = 12f.px,
-        val highlightColor: Int = Color.parseColor("#00FFFFFF"),
-        val textHighLight: String = "",
+        val textColor: Int? = Color.parseColor("#171717"),
+        val fontStyle: ArrayList<FontStyle>? = arrayListOf(),
+        val textAlign: TextAlign? = TextAlign.START,
+        val textSize: Float? = 12f.px,
+        val highlightColor: Int? = Color.parseColor("#00FFFFFF"),
     ): Parcelable
 
     fun getIconWeather(): Int{
